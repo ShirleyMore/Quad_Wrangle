@@ -40,7 +40,7 @@ public class Model {
     }
 
     public MutableLiveData<Boolean> getIsAI() {
-        return isAI;
+        return this.isAI;
     }
 
     public MutableLiveData<Integer> getPlayer2Score() {
@@ -66,10 +66,17 @@ public class Model {
         this.player2Score.setValue(board.getPl2squares());
         this.isAI = new MutableLiveData<>();
         isAI.setValue(true);
+        this.mWinner = new MutableLiveData<>();
+        mWinner.setValue(0);
     }
 
+    public boolean isGameOver() {
+        return board.isGameOver();
+    }
 
-    public boolean isGameOver() { return board.isGameOver();}
+    public void updateWinner() {
+        mWinner.setValue(board.getWinner());
+    }
 
     public boolean legalMove(Square sq1, Square sq2) {
         return board.isLegalMove(sq1, sq2);
@@ -77,6 +84,12 @@ public class Model {
 
     // returns true if the move worked and false otherwise
     public boolean doMove(Square sq1) {
+
+        if (board.isGameOver()) { // game over
+            mWinner.setValue(board.getWinner());
+            System.out.println(mWinner.getValue() + " mWInner in model");
+            return false;
+        }
 
         System.out.println("current player: " + this.mTurn.getValue());
         System.out.println("Square in do move: " + sq1 + ", Value: " + mBoard.getValue()[sq1.getRow()][sq1.getCol()]);
@@ -139,11 +152,19 @@ public class Model {
             this.mTurn.setValue(board.getCurrentPlayer());
             //if (board.getCurrentPlayer() == -1)
         }
+        if (moved) // if there was a change
+            board.updateScores(); // update the scores after the move
         return moved;
 
     }
 
     public void doMoveAI() {
+
+        if (board.isGameOver()) { // if the game is over
+            this.mWinner.setValue(board.getWinner());
+            System.out.println(mWinner.getValue() + " ------------mWInner in model");
+            return;
+        }
         AlphaBetaBoard ab = new AlphaBetaBoard(board);
         //System.out.println("scores before: " + ab.getPl1squares() + " 2:" + ab.getPl2squares());
         Move move = bestMove(ab);
@@ -162,11 +183,25 @@ public class Model {
         //System.out.println("Next player in mturn: " + mTurn.getValue());
         //System.out.println("scores after: " + board.getPl1squares() + " 2: " + board.getPl2squares());
         System.out.println("VAL: "+ab.getVal());
+        board.updateScores(); // update the scores after the move
+
     }
 
-    public void reset() {
+    public void newGame(boolean isAI) {
         this.board = new Board(7);
         this.mBoard.setValue(board.getBoard());
         this.mTurn.setValue(board.getCurrentPlayer());
+        this.isAI.setValue(isAI);
+        mWinner.setValue(0);
+
     }
+
+    public void loadGame(int[][] board_int, int currentPlayer, boolean isAI) {
+        this.board = new Board(7, board_int, currentPlayer);
+        this.mBoard.setValue(board.getBoard());
+        this.mTurn.setValue(board.getCurrentPlayer());
+        this.isAI.setValue(isAI);
+        mWinner.setValue(0);
+    }
+
 }

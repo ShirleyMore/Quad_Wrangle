@@ -48,10 +48,10 @@ public class AlphaBeta {
         //if (winner != 0) {
          //   return Integer.MAX_VALUE * winner;
         //}
-        if (abBoard.getPlaced(1) + abBoard.getPlaced(-1) == 49) {
-            abBoard.setVal(0);
-            return -10000; // todo: fix
-        }
+        //if (abBoard.getPlaced(1) + abBoard.getPlaced(-1) == 49) {
+        //    abBoard.setVal(0);
+        //    return -10000; // todo: fix
+        //}
         if (depth == 0) {
             val = abBoard.evaluateBoard();
             abBoard.setVal(val);
@@ -69,7 +69,7 @@ public class AlphaBeta {
         else { // min player
             for (AlphaBetaBoard child : nextBoards) {
                 beta = Math.min(beta, minimax(child, depth -1, alpha, beta));
-                if (alpha < beta) // was alpha > beta 22/1/23
+                if (alpha > beta) // was alpha > beta 22/1/23 // todo ????
                     break;
             }
             return beta;
