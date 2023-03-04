@@ -51,7 +51,7 @@ public class Model {
     }
 
     // constructor
-    public Model(int size) {
+    public Model(int size, boolean is_AI) {
         this.board = new Board(size); // creating a new board
         //this.board = new Board(); //<- for testing
         this.mBoard = new MutableLiveData<>();
@@ -65,7 +65,7 @@ public class Model {
         this.player2Score = new MutableLiveData<>(); // player 2 score counter
         this.player2Score.setValue(board.getPl2squares());
         this.isAI = new MutableLiveData<>();
-        isAI.setValue(true);
+        isAI.setValue(is_AI);
     }
 
 
@@ -164,9 +164,19 @@ public class Model {
         System.out.println("VAL: "+ab.getVal());
     }
 
-    public void reset() {
+    public void newGame(boolean isAI) {
         this.board = new Board(7);
         this.mBoard.setValue(board.getBoard());
         this.mTurn.setValue(board.getCurrentPlayer());
+        this.isAI.setValue(isAI);
+
     }
+
+    public void loadGame(int[][] board_int, int currentPlayer, boolean isAI) {
+        this.board = new Board(7, board_int, currentPlayer);
+        this.mBoard.setValue(board.getBoard());
+        this.mTurn.setValue(board.getCurrentPlayer());
+        this.isAI.setValue(isAI);
+    }
+
 }

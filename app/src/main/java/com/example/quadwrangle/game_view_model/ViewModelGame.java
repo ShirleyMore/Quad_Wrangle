@@ -53,7 +53,7 @@ public class ViewModelGame extends ViewModel{
     }
 
     public ViewModelGame() {
-        this.game = new Model(SIZE);
+        this.game = new Model(SIZE, true); // AI by default
         this.mBoard = game.getmBoard();
         this.player1Score = game.getPlayer1Score();
         this.player2Score = game.getPlayer2Score();
@@ -65,30 +65,25 @@ public class ViewModelGame extends ViewModel{
 
     public boolean onTileClick(int row, int col) {
         // if the game is null start a new game
-        if (game == null)
-            reset();
-        else {
-            System.out.println("IN VMG: sq1: [" + row + ", " + col + "]");
-            boolean moved = game.doMove(new Square(row, col)); // legal move + do move
-            System.out.println("HAS MOVED?: " + moved);
-            // if the game is over:
-            if (game.isGameOver()) {
-                if (game.getmWinner() != null) {
-                    winner = game.getmWinner();
-                    //if (winner.getValue() == -1)
-                    //    this.player1Score.setValue(this.player1Score.getValue() + 1);
-                    //else
-                    //    this.player2Score.setValue(this.player2Score.getValue() + 1);
-                }
-                return true;
+        System.out.println("IN VMG: sq1: [" + row + ", " + col + "]");
+        boolean moved = game.doMove(new Square(row, col)); // legal move + do move
+        System.out.println("HAS MOVED?: " + moved);
+        // if the game is over:
+        if (game.isGameOver()) {
+            if (game.getmWinner() != null) {
+                winner = game.getmWinner();
+                //if (winner.getValue() == -1)
+                //    this.player1Score.setValue(this.player1Score.getValue() + 1);
+                //else
+                //    this.player2Score.setValue(this.player2Score.getValue() + 1);
             }
-            player1Score = game.getPlayer1Score(); // updating scores (because its Integer so its not a ktovet)
-            player2Score = game.getPlayer2Score(); // updating scores (because its Integer so its not a ktovet)
-
-
-            return moved;
+            return true;
         }
-        return false;
+        player1Score = game.getPlayer1Score(); // updating scores (because its Integer so its not a ktovet)
+        player2Score = game.getPlayer2Score(); // updating scores (because its Integer so its not a ktovet)
+
+
+        return moved;
     }
 
     public void doMoveAI() {
@@ -107,8 +102,5 @@ public class ViewModelGame extends ViewModel{
         return winner;
     }
 
-    public void reset() {
-        this.game.reset();
-    }
 
 }

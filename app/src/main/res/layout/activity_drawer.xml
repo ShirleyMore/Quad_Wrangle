@@ -5,8 +5,9 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:fitsSystemWindows="false"
+    tools:openDrawer="start"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <include
         android:id="@+id/app_bar_drawer"
@@ -20,6 +21,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:backgroundTint="#b8adb5"
+        app:itemIconTint="#3e0b40"
+        app:itemTextColor="#3e0b40"
         app:headerLayout="@layout/nav_header_drawer"
         app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

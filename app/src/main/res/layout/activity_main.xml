@@ -35,16 +35,6 @@
             app:srcCompat="@drawable/board" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="125dp"
-            android:layout_height="68dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/back_buttn" />
-
-        <ImageView
             android:id="@+id/imageView2"
             android:layout_width="112dp"
             android:layout_height="93dp"
@@ -65,16 +55,6 @@
             app:layout_constraintHorizontal_bias="0.906"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:srcCompat="@drawable/white_count_bttn" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="69dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/help_buttn" />
 
         <TextView
             android:id="@+id/score1"
@@ -99,6 +79,69 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3"
             app:layout_constraintVertical_bias="0.487" />
+
+        <ImageView
+            android:id="@+id/change_mode_button"
+            android:layout_width="96dp"
+            android:layout_height="59dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.949"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/save_game_button"
+            app:srcCompat="@drawable/change_mode" />
+
+        <ImageView
+            android:id="@+id/save_game_button"
+            android:layout_width="103dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.584"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/board"
+            app:srcCompat="@drawable/save_game" />
+
+        <ImageView
+            android:id="@+id/current_color_image"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/current_player_text"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="@+id/current_player_text"
+            app:layout_constraintTop_toBottomOf="@+id/current_player_text"
+            app:srcCompat="@drawable/disc_black" />
+
+        <TextView
+            android:id="@+id/current_player_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#FBD3D3"
+            android:fontFamily="@font/bubblegum_sans"
+            android:text="Current Player:"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/game_type_text" />
+
+        <TextView
+            android:id="@+id/game_type_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:background="#FBD3D3"
+            android:fontFamily="@font/bubblegum_sans"
+            android:text="Game Type"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
