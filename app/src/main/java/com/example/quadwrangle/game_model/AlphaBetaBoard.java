@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AlphaBetaBoard extends Board {
-    final static int MAX_DEPTH = 7;
+    final static int MAX_DEPTH = 3;
     private int depth; // the depth of the tree
     private int val; // the value of the board for comparison later
     private Move move; // the move of the board
@@ -109,6 +109,7 @@ public class AlphaBetaBoard extends Board {
         }
         else // move is drop
             currentAB.drop(sq1);
+        currentAB.updateScores(); // update the scores for the board
     }
 
 

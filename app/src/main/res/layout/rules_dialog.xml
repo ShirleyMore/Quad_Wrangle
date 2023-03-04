@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/instructions2"
+        android:layout_width="370dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:text="להיות בעל המספר הגבוה ביותר של חיילים כשנגמר המקום בלוח"
+        android:textAlignment="center"
+        android:textColor="#ECB2CD"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/text_title2"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/text_title2"
+        app:layout_constraintTop_toBottomOf="@+id/text_title2" />
+
+    <TextView
+        android:id="@+id/text_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="הוראות"
+        android:textColor="#ECB2CD"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/instructions2"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/instructions2"
+        app:layout_constraintTop_toBottomOf="@+id/instructions2" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="379dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Quad Wrangle איך משחקים"
+        android:textAlignment="center"
+        android:textColor="#ECB2CD"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="מטרה"
+        android:textColor="#ECB2CD"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/text_title"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/text_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="374dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="4dp"
+        android:text="1. גדילה - אבן יכולה לגדל אבן חדשה בריבוע ריק במאונך לה או באלכסון לה. כל אבני היריב המאונכות לאבן החדשה מומרות לאבנים מאותו הצבע."
+        android:textAlignment="viewEnd"
+        android:textColor="#ECB2CD"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/instructions3"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <TextView
+        android:id="@+id/instructions3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="למשחק 3 מהלכים:"
+        android:textAlignment="center"
+        android:textColor="#ECB2CD"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/text_title3"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/text_title3"
+        app:layout_constraintTop_toBottomOf="@+id/text_title3" />
+
+    <TextView
+        android:id="@+id/instructions4"
+        android:layout_width="374dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="4dp"
+        android:text="2. החלקה - אבן יכולה להחליק על פני הלוח בקו ישר או באלכסון כמו מלכה בשחמט. כל אבני היריב הסמוכות למקום אליו האבן החליקה מומרות לאבנים מאותו הצבע."
+        android:textAlignment="viewEnd"
+        android:textColor="#ECB2CD"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/instructions"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/instructions"
+        app:layout_constraintTop_toBottomOf="@+id/instructions" />
+
+    <TextView
+        android:id="@+id/instructions5"
+        android:layout_width="376dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="16dp"
+        android:text="3. הטלה - אם שני המהלכים הראשונים אינם זמינים, ניתן להוריד אבן ללוח בכל מקום פנוי שאינו צמוד לאבן מאותו הצבע. במהלך זה אבני היריב אינן מומרות."
+        android:textAlignment="viewEnd"
+        android:textColor="#ECB2CD"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/instructions4"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/instructions4"
+        app:layout_constraintTop_toBottomOf="@+id/instructions4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
