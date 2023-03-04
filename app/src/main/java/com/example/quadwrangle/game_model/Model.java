@@ -164,9 +164,19 @@ public class Model {
         System.out.println("VAL: "+ab.getVal());
     }
 
-    public void reset() {
+    public void newGame(boolean isAI) {
         this.board = new Board(7);
         this.mBoard.setValue(board.getBoard());
         this.mTurn.setValue(board.getCurrentPlayer());
+        this.isAI.setValue(isAI);
+
     }
+
+    public void loadGame(int[][] board_int, int currentPlayer, boolean isAI) {
+        this.board = new Board(7, board_int, currentPlayer);
+        this.mBoard.setValue(board.getBoard());
+        this.mTurn.setValue(board.getCurrentPlayer());
+        this.isAI.setValue(isAI);
+    }
+
 }

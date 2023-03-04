@@ -20,6 +20,32 @@ public class Board {
         this.currentPlayer = 1; // player 1 always starts
     }
 
+    // constructor for loading a game
+    public Board(int size, int[][] board, int currentPlayer) {
+        Board.size = size;
+        int pl1squares = 0;
+        int pl2squares = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                int num = board[i][j];
+                if (num == 1)
+                    pl1squares++;
+                if (num == -1)
+                    pl2squares++;
+            }
+        }
+        this.pl1squares = pl1squares;
+        this.pl2squares = pl2squares;
+        this.currentPlayer = currentPlayer;
+        // copy board
+        this.board = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                this.board[i][j] = board[i][j];
+            }
+        }
+    }
+
     public Board() { // custom board for testing
         Board.size = 7;
         this.pl1squares = 46;
@@ -314,13 +340,7 @@ public class Board {
 
     public boolean isGameOver() {
         // if the board is full
-        if ((this.pl1squares + this.pl2squares) == (size * size))
-            return true;
-        // if there are no possible moves for current player Growth / Slide
-        if (checkANYPossibleMoveOnBoard())
-            // if there is a possible move return false
-            return false;
-        return true; // there is no possible move = return game over
+        return ((this.pl1squares + this.pl2squares) == (size * size));
     }
 
     // returns if there is ANY possible move
