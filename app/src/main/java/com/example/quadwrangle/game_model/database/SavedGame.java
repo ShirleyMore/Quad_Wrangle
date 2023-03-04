@@ -33,24 +33,6 @@ public class SavedGame {
         this.gameType = gameType;
     }
 
-    public static String board_toString(int [][] board) {
-        // board will always be 7x7
-        StringBuilder boardStr = new StringBuilder();
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                boardStr.append(board[i][j]).append(",");
-            }
-            boardStr.append("\n");
-        }
-        return boardStr.toString();
-    }
-
-    public static String date_ToString(long date) {
-        String pattern = "dd/MM/yyyy HH:mm:ss";
-        @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat(pattern);
-        return df.format(date);
-    }
-
     public void setId(long id) {
         this.gameId = id;
     }

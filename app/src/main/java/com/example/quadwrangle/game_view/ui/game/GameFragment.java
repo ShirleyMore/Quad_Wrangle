@@ -1,12 +1,18 @@
-package com.example.quadwrangle.game_view.ui.gallery;
+package com.example.quadwrangle.game_view.ui.game;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,34 +23,59 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.quadwrangle.R;
-import com.example.quadwrangle.databinding.FragmentGalleryBinding;
+import com.example.quadwrangle.databinding.FragmentGameBinding;
 import com.example.quadwrangle.game_model.Square;
 import com.example.quadwrangle.game_view.SquareButton;
 import com.example.quadwrangle.game_view_model.ViewModelGame;
 
-public class GalleryFragment extends Fragment {
+import org.w3c.dom.Text;
 
-    private FragmentGalleryBinding binding;
+public class GameFragment extends Fragment {
+
+    private FragmentGameBinding binding;
     private ConstraintLayout layout;
-    private ViewModelGame viewModel;
+    private GameViewModel viewModel;
     private SquareButton[][] board;
-    private TextView score1;
-    private TextView score2;
+    private ImageView save_game;
+    private ImageView change_mode;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gallery ,container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game,container, false);
         View root = binding.getRoot();
         binding.setLifecycleOwner(this);
         // initialize the view model
-        viewModel = new ViewModelProvider(this).get(ViewModelGame.class);
+        viewModel = new GameViewModel(this.getContext());
 
         createBoard();
-        score1 = binding.score1;
-        score2 = binding.score2;
+        TextView score1 = binding.score1;
+        TextView score2 = binding.score2;
+        TextView gameType = binding.gameTypeText;
+        save_game = binding.saveGameButton;
+        save_game.setOnClickListener(this::SAVE_GAME);
+
+        // set the text to the game type:
+        if (viewModel.isAI.getValue()) // if AI
+            gameType.setText("Game Type: AI");
+        else
+            gameType.setText("Game Type: 2 Player");
+
+        change_mode = binding.changeModeButton;
+        change_mode.setOnClickListener(this::CHANGE_MODE);
+
+        ImageView currentColorImg = binding.currentColorImage;
+        // observer for current player image
+        viewModel.mTurn.observe(binding.getLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            // change the current player color image
+            public void onChanged(Integer integer) {
+                if (integer == 1)
+                    currentColorImg.setImageResource(R.drawable.disc_black);
+                else
+                    currentColorImg.setImageResource(R.drawable.disc_white);
+            }
+        });
 
         // observer for mPressed_for_slide
         viewModel.mPressed_for_slide.observe(binding.getLifecycleOwner(), new Observer<Square>() {
@@ -103,6 +134,84 @@ public class GalleryFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
+    public void SAVE_GAME(View view) {
+        show_dialog();
+        //viewModel.saveGame("anem");
+    }
+
+    void show_dialog() {
+        final Dialog dialog = new Dialog(this.getContext());
+        dialog.setCancelable(true); // make it so if we press everywhere it cancels
+        dialog.setContentView(R.layout.save_game_dialog); // connect to layout
+        // initialize views
+        TextView save_name_text = dialog.findViewById(R.id.save_text);
+        ImageView save_button = dialog.findViewById(R.id.save);
+        // set the save button listener
+        save_button.setOnClickListener((V) -> {
+            String name = save_name_text.getText().toString();
+            viewModel.saveGame(name);
+            dialog.dismiss();
+            Toast.makeText(getContext(), "GAME SAVED!", Toast.LENGTH_SHORT).show();
+        });
+        // show the dialog
+        dialog.show();
+    }
+
+    public void CHANGE_MODE(View view) {
+        final Dialog dialog = new Dialog(this.getContext());
+        dialog.setCancelable(true); // make it so if we press everywhere it cancels
+        dialog.setContentView(R.layout.change_mode_dialog); // connect to layout
+
+        // initialize views
+        TextView AI_button = dialog.findViewById(R.id.AI);
+        ImageView AiBg = dialog.findViewById(R.id.imageView11);
+        TextView twoPlayer_button = dialog.findViewById(R.id.two_player);
+        ImageView twoBg = dialog.findViewById(R.id.imageView12);
+        TextView title1 = dialog.findViewById(R.id.change_title);
+        // 2nd screen
+        TextView title2 = dialog.findViewById(R.id.are_you_sure);
+        TextView title3 = dialog.findViewById(R.id.save_before);
+        TextView yes = dialog.findViewById(R.id.yes);
+        ImageView yesButton = dialog.findViewById(R.id.yesbttn);
+
+        // set the save button listener
+        AI_button.setOnClickListener((V) -> {
+            AiBg.setVisibility(View.GONE);
+            twoBg.setVisibility(View.GONE);
+            title1.setVisibility(View.GONE);
+            AI_button.setVisibility(View.GONE);
+            twoPlayer_button.setVisibility(View.GONE);
+            title2.setText("Are you sure you want to start a new AI game?");
+            title2.setVisibility(View.VISIBLE);
+            title3.setVisibility(View.VISIBLE);
+            yes.setVisibility(View.VISIBLE);
+            yesButton.setVisibility(View.VISIBLE);
+        });
+        twoPlayer_button.setOnClickListener((V) -> {
+            AiBg.setVisibility(View.GONE);
+            twoBg.setVisibility(View.GONE);
+            title1.setVisibility(View.GONE);
+            AI_button.setVisibility(View.GONE);
+            twoPlayer_button.setVisibility(View.GONE);
+            title2.setText("Are you sure you want to start a new 2 player game?");
+            title2.setVisibility(View.VISIBLE);
+            title3.setVisibility(View.VISIBLE);
+            yes.setVisibility(View.VISIBLE);
+            yesButton.setVisibility(View.VISIBLE);
+        });
+
+        yes.setOnClickListener((V) -> {
+            // todo: change game mode -> work on a good ai / 2player system
+            // todo: end screen
+            // todo: load a game
+            // todo: help screen with rules
+        });
+        // show the dialog
+        dialog.show();
+    }
+
 
 
     private void createBoard() {

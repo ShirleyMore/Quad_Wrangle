@@ -1,6 +1,5 @@
 package com.example.quadwrangle.game_model.database;
 
-import static com.example.quadwrangle.game_model.database.SavedGame.board_toString;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;

@@ -3,8 +3,10 @@ package com.example.quadwrangle.game_view;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.quadwrangle.R;
+import com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,26 +23,48 @@ public class DrawerActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDrawerBinding binding;
+    private UserDbLeaderboardConnector userDbLeaderboardConnector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // initialize binding
         binding = ActivityDrawerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // set toolbar
         setSupportActionBar(binding.appBarDrawer.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_saved_games, R.id.nav_game, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // initialize userDbLeaderboardConnector
+        userDbLeaderboardConnector = new UserDbLeaderboardConnector(this.getBaseContext());
+
+        // set text of nav header
+        drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                setDrawerHeader();
+            }
+        });
+    }
+
+    public void setDrawerHeader() {
+        TextView username_text = findViewById(R.id.Username_text);
+        TextView score_text = findViewById(R.id.Highscore_text);
+        username_text.setText("Hello " + userDbLeaderboardConnector.getMyUsername());
+        score_text.setText("Your high score is " + userDbLeaderboardConnector.getMyHighScore());
     }
 
     @Override
@@ -56,4 +80,6 @@ public class DrawerActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 }

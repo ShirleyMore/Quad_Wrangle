@@ -1,6 +1,5 @@
 package com.example.quadwrangle.game_view.ui.home;
 
-import static com.example.quadwrangle.game_model.database.SavedGame.board_toString;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -17,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quadwrangle.R;
-import com.example.quadwrangle.databinding.FragmentHomeBinding;
+import com.example.quadwrangle.databinding.FragmentSavedGamesBinding;
+import com.example.quadwrangle.databinding.FragmentSavedGamesBinding;
 import com.example.quadwrangle.game_model.database.GameInSavedGamesPage;
 import com.example.quadwrangle.game_model.database.SavedGame;
 import com.example.quadwrangle.game_model.database.SavedGamesDbManager;
 import com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter;
+import com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector;
 import com.example.quadwrangle.game_view_model.savedGamesDbConnector;
 
 import java.text.DateFormat;
@@ -34,17 +35,18 @@ import java.util.Date;
 
 public class HomeFragment extends Fragment { /// saved games activity table
 
-    private FragmentHomeBinding binding;
+    private FragmentSavedGamesBinding binding;
     private RecyclerView savedGamesRecyclerView;
     private ArrayList<GameInSavedGamesPage> gamesArrayList;
     private MySavedGamesAdapter myAdapter;
+    private UserDbLeaderboardConnector userDbLeaderboardConnector;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved_games,container, false);
         View root = binding.getRoot();
         binding.setLifecycleOwner(this);
 
@@ -54,6 +56,9 @@ public class HomeFragment extends Fragment { /// saved games activity table
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // initialize userDbLeaderboardConnector
+        userDbLeaderboardConnector = new UserDbLeaderboardConnector(this.getContext());
 
         savedGamesRecyclerView = view.findViewById(R.id.savedGamesRecyclerView);
         savedGamesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -69,8 +74,8 @@ public class HomeFragment extends Fragment { /// saved games activity table
 
 
     private void getData() {
-        savedGamesDbConnector connector = new savedGamesDbConnector(getContext()); // todo: id =1 for now
-        GameInSavedGamesPage[] savedGamesForPage = connector.getAllSavedGamesForPage(1);
+        savedGamesDbConnector connector = new savedGamesDbConnector(getContext());
+        GameInSavedGamesPage[] savedGamesForPage = connector.getAllSavedGamesForPage(userDbLeaderboardConnector.getMyId());
         gamesArrayList.addAll(Arrays.asList(savedGamesForPage));
         System.out.println(gamesArrayList.size());
         // sort from high to low by scores
@@ -79,7 +84,7 @@ public class HomeFragment extends Fragment { /// saved games activity table
         // notify the adapter that there has been a change
         myAdapter.notifyDataSetChanged();
     }
-
+/*
     public void testSaveGame() {
         // date
         Date now = new Date();
@@ -110,5 +115,5 @@ public class HomeFragment extends Fragment { /// saved games activity table
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
+    }*/
 }

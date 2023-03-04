@@ -1,13 +1,16 @@
-package com.example.quadwrangle.game_view.ui.gallery;
+package com.example.quadwrangle.game_view.ui.game;
 
-import androidx.lifecycle.LiveData;
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.quadwrangle.game_model.Model;
 import com.example.quadwrangle.game_model.Square;
+import com.example.quadwrangle.game_model.database.SavedGamesDbManager;
+import com.example.quadwrangle.game_view_model.savedGamesDbConnector;
 
-public class GalleryViewModel extends ViewModel {
+public class GameViewModel extends ViewModel {
 
     // to Fragment
     private MutableLiveData<Integer> winner;
@@ -20,6 +23,8 @@ public class GalleryViewModel extends ViewModel {
     public MutableLiveData<Square> mPressed_for_slide; // the first square for slide
     public MutableLiveData<Square> last_mPressed_for_slide; // the last selected square - so I can remove the glow
     public MutableLiveData<Boolean> isAI;
+
+    public com.example.quadwrangle.game_view_model.savedGamesDbConnector savedGamesDbConnector;
 
     private final Model game;
     private static final int SIZE = 7;
@@ -50,7 +55,7 @@ public class GalleryViewModel extends ViewModel {
         return this.player2Score.getValue();
     }
 
-    public GalleryViewModel() {
+    public GameViewModel(Context context) {
         this.game = new Model(SIZE);
         this.mBoard = game.getmBoard();
         this.player1Score = game.getPlayer1Score();
@@ -59,6 +64,7 @@ public class GalleryViewModel extends ViewModel {
         this.mPressed_for_slide = game.getmPressed_for_slide();
         this.last_mPressed_for_slide = game.getLast_mPressed_for_slide();
         this.isAI = game.getIsAI();
+        savedGamesDbConnector = new savedGamesDbConnector(context);
     }
 
     public boolean onTileClick(int row, int col) {
@@ -95,6 +101,10 @@ public class GalleryViewModel extends ViewModel {
             player1Score = game.getPlayer1Score(); // updating scores (because its Integer so its not a ktovet)
             player2Score = game.getPlayer2Score(); // updating scores (because its Integer so its not a ktovet)
         }
+    }
+
+    public void saveGame(String name) {
+        savedGamesDbConnector.saveGame(mBoard.getValue(), name, mTurn.getValue(), isAI.getValue());
     }
 
 

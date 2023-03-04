@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="280dp"
+        android:layout_height="278dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371"
+        app:srcCompat="@android:drawable/divider_horizontal_dark" />
+
+    <TextView
+        android:id="@+id/change_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Change Game Mode"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="166dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="@+id/change_title"
+        app:layout_constraintStart_toStartOf="@+id/change_title"
+        app:layout_constraintTop_toBottomOf="@+id/change_title"
+        app:srcCompat="@drawable/button" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="166dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/change_title"
+        app:layout_constraintStart_toStartOf="@+id/change_title"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11"
+        app:srcCompat="@drawable/button" />
+
+    <TextView
+        android:id="@+id/AI"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="AI (vs computer)"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.482" />
+
+    <TextView
+        android:id="@+id/two_player"
+        android:layout_width="146dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="2 player"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="0.473" />
+
+    <TextView
+        android:id="@+id/are_you_sure"
+        android:layout_width="248dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Are you sure you want to start a new X game?"
+        android:textAlignment="center"
+        android:textColor="#F4F4F4"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+    <TextView
+        android:id="@+id/save_before"
+        android:layout_width="242dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="you may want to save the game before starting a new one"
+        android:textAlignment="center"
+        android:textColor="#F4F4F4"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10" />
+
+    <ImageView
+        android:id="@+id/yesbttn"
+        android:layout_width="236dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="84dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:srcCompat="@drawable/button" />
+
+    <TextView
+        android:id="@+id/yes"
+        android:layout_width="177dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="yes"
+        android:textAlignment="center"
+        android:textColor="#F6F5F5"
+        android:textSize="48sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/yesbttn"
+        app:layout_constraintEnd_toEndOf="@+id/yesbttn"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="@+id/yesbttn"
+        app:layout_constraintTop_toTopOf="@+id/yesbttn"
+        app:layout_constraintVertical_bias="0.482" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

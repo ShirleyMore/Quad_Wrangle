@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -63,7 +60,7 @@ public class OpeningScreenActivity extends AppCompatActivity {
 
 
     public void startOnClick() {
-        Intent intent = new Intent(this, AnimationActivity.class);
+        Intent intent = new Intent(this, ConnectionActivity.class);
         // remove the small pop up animation so that my animation will appear smoother
         overridePendingTransition(0, 0);
         startActivity(intent);
