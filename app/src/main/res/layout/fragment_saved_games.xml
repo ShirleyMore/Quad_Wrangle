@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_vertical_backg"
+        tools:context=".game_view.ui.home.HomeFragment">
+
+        <TextView
+            android:id="@+id/secondTitle3"
+            android:layout_width="113dp"
+            android:layout_height="27dp"
+            android:text="TYPE"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/secondTitle"
+            android:layout_width="131dp"
+            android:layout_height="27dp"
+            android:text="SAVE NAME"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/secondTitle3"
+            app:layout_constraintTop_toTopOf="@+id/secondTitle3" />
+
+        <TextView
+            android:id="@+id/secondTitle2"
+            android:layout_width="100dp"
+            android:layout_height="27dp"
+            android:text="DATE"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/secondTitle3"
+            app:layout_constraintTop_toTopOf="@+id/secondTitle3" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/savedGamesRecyclerView"
+            android:layout_width="409dp"
+            android:layout_height="694dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

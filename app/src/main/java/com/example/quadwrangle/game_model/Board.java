@@ -316,11 +316,10 @@ public class Board {
         // if the board is full
         if ((this.pl1squares + this.pl2squares) == (size * size))
             return true;
-        // if there are no possible moves for current player Growth / Slide
-        if (checkANYPossibleMoveOnBoard())
-            // if there is a possible move return false
-            return false;
-        return true; // there is no possible move = return game over
+        // if there are no possible moves for current player because there is an option
+        // that there are no rocks left from a color
+        // if there is a possible move return false
+        return !checkANYPossibleMoveOnBoard();// there is no possible move = return game over
     }
 
     // returns if there is ANY possible move

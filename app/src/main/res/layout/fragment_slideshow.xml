@@ -8,7 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".game_view.ui.slideshow.SlideshowFragment">
+        tools:context=".game_view.ui.slideshow.SlideshowFragment"
+        android:background="@drawable/main_vertical_backg">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -23,27 +24,16 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="217dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="4dp"
-            android:text="LEADERBOARD"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/textView2"
             android:layout_width="408dp"
             android:layout_height="25dp"
+            android:layout_marginTop="16dp"
             android:text="      Name                       /                     Score"
+            android:textColor="#000000"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
