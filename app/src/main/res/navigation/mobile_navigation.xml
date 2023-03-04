@@ -3,23 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_gallery">
+    app:startDestination="@+id/nav_game">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.quadwrangle.game_view.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_saved_games"
+        android:name="com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment"
+        android:label="@string/menu_saved_games" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.quadwrangle.game_view.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_game"
+        android:name="com.example.quadwrangle.game_view.ui.game.GameFragment"
+        android:label="@string/menu_game"
+        tools:layout="@layout/fragment_game" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.quadwrangle.game_view.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_leaderboard"
+        android:name="com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment"
+        android:label="@string/menu_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
 </navigation>

@@ -1,6 +1,5 @@
 package com.example.quadwrangle.game_model.database;
 
-import static com.example.quadwrangle.game_model.database.SavedGame.board_toString;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -9,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class SavedGamesDbManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        // sqLiteDatabase.execSQL: Execute a single SQL statement that is NOT a SELECT or any other SQL statement that returns data.
         sqLiteDatabase.execSQL(CREATE_TABLE);
         System.out.println("SAVED GAMES DATABASE onCreate");
     }
@@ -103,5 +105,28 @@ public class SavedGamesDbManager extends SQLiteOpenHelper {
         }
         closeDatabase();
         return arr;
+    }
+
+    //table: the name of the table you want to query
+    //columns: the column names that you want returned. Don't return data that you don't need.
+    //selection: the row data that you want returned from the columns (This is the WHERE clause.)
+    //selectionArgs: This is substituted for the ? in the selection String above.
+    //groupBy and having: This groups duplicate data in a column with data having certain conditions. Any unneeded parameters can be set to null.
+    //orderBy: sort the data
+    //limit: limit the number of results to return
+    public SavedGame getGameById(long gameId) {
+        SQLiteDatabase database = open();
+        Cursor cursor = database.query(SavedGamesDbManager.TABLE_PRODUCT, allColumns, COLUMN_GAME_ID + " =?", new String[]{gameId + ""}, null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext(); // move to 1
+            long user_id = cursor.getLong(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_USER_ID));
+            String save_name = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_SAVE_NAME));
+            String saved_date = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_SAVE_DATE));
+            String board = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_BOARD));
+            String next_player = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_NEXT_PLAYER));
+            String game_type = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_GAME_TYPE));
+            return new SavedGame(gameId, user_id, save_name, saved_date, board, next_player, game_type);
+        }
+        return null;
     }
 }

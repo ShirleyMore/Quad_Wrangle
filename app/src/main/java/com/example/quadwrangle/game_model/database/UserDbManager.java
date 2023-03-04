@@ -43,12 +43,12 @@ public class UserDbManager extends SQLiteOpenHelper {
         System.out.println("DATABASE onUpgrade");
     }
 
-    public void updateScore(int newScore, User user) {
+    public void updateScore(int newScore, long id) {
         SQLiteDatabase database = open();
         ContentValues values = new ContentValues();
         values.put(UserDbManager.COLUMN_HIGH_SCORE, newScore);
-        database.update(UserDbManager.TABLE_PRODUCT, values, "id=" + user.getId(), null);
-        System.out.println("DATABASE updateScore USER " + user.getId());
+        database.update(UserDbManager.TABLE_PRODUCT, values, "id=" + id, null);
+        System.out.println("DATABASE updateScore USER " + id);
         database.close();
     }
 
@@ -128,5 +128,15 @@ public class UserDbManager extends SQLiteOpenHelper {
         }
         return myUser;
 
+    }
+
+    public long getIdForUsername(String username) {
+        SQLiteDatabase database = open();
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, COLUMN_NAME + " =?", new String[]{username + ""}, null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext(); // move to 1
+            return cursor.getLong(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_ID));
+        }
+        return -1;
     }
 }

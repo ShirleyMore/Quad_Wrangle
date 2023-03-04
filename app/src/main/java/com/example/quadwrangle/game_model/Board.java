@@ -1,5 +1,7 @@
 package com.example.quadwrangle.game_model;
 
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.*;
 public class Board {
     public static int size; // one size because its a square board
@@ -18,6 +20,32 @@ public class Board {
         this.board = board;
         this.assembleStart();
         this.currentPlayer = 1; // player 1 always starts
+    }
+
+    // constructor for loading a game
+    public Board(int size, int[][] board, int currentPlayer) {
+        Board.size = size;
+        int pl1squares = 0;
+        int pl2squares = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                int num = board[i][j];
+                if (num == 1)
+                    pl1squares++;
+                if (num == -1)
+                    pl2squares++;
+            }
+        }
+        this.pl1squares = pl1squares;
+        this.pl2squares = pl2squares;
+        this.currentPlayer = currentPlayer;
+        // copy board
+        this.board = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                this.board[i][j] = board[i][j];
+            }
+        }
     }
 
     public Board() { // custom board for testing
@@ -86,7 +114,6 @@ public class Board {
         placeRock(sq);
         ArrayList<Square> lstNoDiagonals = sq.getNeighboursNoDiagonals();
         turnOverEnemiesAround(lstNoDiagonals); // change orthogonal and diagonal squares to current player type
-        changePlayerSquareCount(1, this.currentPlayer); // add the new growth to count
     }
 
     public void setBoard(int[][] board) {
@@ -155,6 +182,21 @@ public class Board {
                 if(isLegalMoveForSlide(sq, newSpot)) // if the spots are different = slide
                     return 2;
         return 0;
+    }
+
+    public void updateScores() {
+        int black = 0;
+        int white = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == -1)
+                    white++;
+                else if (board[i][j] == 1)
+                    black++;
+            }
+        }
+        this.pl1squares = black;
+        this.pl2squares = white;
     }
 
     public void moveVoid(Square sq1, Square sq2) {
@@ -264,24 +306,11 @@ public class Board {
     }
 
     protected void turnOverEnemiesAround(ArrayList<Square> lst) {
-        int countTurned = 0;
         int p = this.currentPlayer;
         for (Square s : lst)
             if (getValue(s) == p*(-1)) { // if the square is an enemy square
                 placeRock(s); // change to current player type
-                countTurned++;
             }
-        // add the amount turned to the counters
-        changePlayerSquareCount(countTurned, this.currentPlayer);
-        // remove from other counter
-        changePlayerSquareCount(-countTurned, this.currentPlayer*(-1));
-    }
-
-    private void changePlayerSquareCount(int num, int player) {
-        if (player == 1)
-            this.pl1squares += num;
-        else
-            this.pl2squares += num;
     }
 
 
@@ -314,13 +343,10 @@ public class Board {
 
     public boolean isGameOver() {
         // if the board is full
-        if ((this.pl1squares + this.pl2squares) == (size * size))
-            return true;
-        // if there are no possible moves for current player Growth / Slide
-        if (checkANYPossibleMoveOnBoard())
-            // if there is a possible move return false
-            return false;
-        return true; // there is no possible move = return game over
+        System.out.println("pl1: " + pl1squares + "   pl2: " + pl2squares);
+        System.out.println("SUM: " + (pl1squares+pl2squares));
+        System.out.println((this.pl1squares + this.pl2squares) == 49);
+        return ((this.pl1squares + this.pl2squares) == (size*size)); // from now on size is always 49
     }
 
     // returns if there is ANY possible move
@@ -366,23 +392,15 @@ public class Board {
         return (getValue(sq) == 0);
     }
 
-    private int getWinner() {
+    public int getWinner() {
         if (this.pl1squares > this.pl2squares)
             return 1;
         else if (this.pl1squares == this.pl2squares)
             return 3; // tie
         else
-            return 2;
+            return -1;
     }
 
-    public boolean checkWin() {
-        if (isGameOver()) {// if the game is not over
-            System.out.println("Game Over!");
-            System.out.println("Player " + getWinner() + " is the winner!");
-            return true;
-        }
-        return false;
-    }
 
     private boolean checkAvailableSlide(Square sq) {
         // sq is an occupied friendly square -> I need to check if it is possible to move it
@@ -410,7 +428,6 @@ public class Board {
 
     protected void drop(Square sq) {
         placeRock(sq);
-        changePlayerSquareCount(getCurrentPlayer(), 1);
     }
 
     protected boolean isLegalMoveForDrop(Square sq) {
