@@ -109,8 +109,8 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@+id/load_yes_button"
         app:layout_constraintEnd_toEndOf="@+id/load_yes_button"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="@+id/load_yes_button"
         app:layout_constraintTop_toTopOf="@+id/load_yes_button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.52" />
 </androidx.constraintlayout.widget.ConstraintLayout>

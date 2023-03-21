@@ -44,11 +44,9 @@ public class SavedGamesFragment extends Fragment implements IClickable{ /// save
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
+        // getting the view model OF THE ENTIRE DRAWER ACTIVITY
         gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
-        //
-        //gameViewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+        // initialize binding and inflate
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved_games,container, false);
         View root = binding.getRoot();
         binding.setLifecycleOwner(this);
@@ -64,15 +62,15 @@ public class SavedGamesFragment extends Fragment implements IClickable{ /// save
         userDbLeaderboardConnector = new UserDbLeaderboardConnector(this.getContext());
         // and saved games connector
         savedGamesDbConnector = new SavedGamesDbConnector(getContext());
-
+        // find and set the savedGamesRecyclerView
         savedGamesRecyclerView = view.findViewById(R.id.savedGamesRecyclerView);
         savedGamesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         savedGamesRecyclerView.setHasFixedSize(true);
-
+        // initialize gamesArrayList and myAdapter
         gamesArrayList = new ArrayList<GameInSavedGamesPage>();
-
         myAdapter = new MySavedGamesAdapter(getContext(), gamesArrayList, this);
         savedGamesRecyclerView.setAdapter(myAdapter);
+        // call the getData method to get the saved games data
         getData();
         // notify the adapter that there has been a change
         myAdapter.notifyDataSetChanged();
@@ -80,7 +78,8 @@ public class SavedGamesFragment extends Fragment implements IClickable{ /// save
 
 
     private void getData() {
-        GameInSavedGamesPage[] savedGamesForPage = savedGamesDbConnector.getAllSavedGamesForPage(userDbLeaderboardConnector.getMyId());
+        GameInSavedGamesPage[] savedGamesForPage = savedGamesDbConnector
+                .getAllSavedGamesForPage(userDbLeaderboardConnector.getMyId());
         gamesArrayList.addAll(Arrays.asList(savedGamesForPage));
         // sort from high to low by scores
         gamesArrayList.sort(Comparator.comparing(GameInSavedGamesPage::getDate));
@@ -116,13 +115,10 @@ public class SavedGamesFragment extends Fragment implements IClickable{ /// save
             else {
                 Toast.makeText(this.getContext(), "Loading game...", Toast.LENGTH_SHORT).show();
                 // navigate to the game fragment
-
                 Navigation.findNavController(this.requireView()).navigate(R.id.nav_game);
-                System.out.println(Arrays.deepToString(gameViewModel.getBoard()));
+                // Call the load game function to load the new game
                 gameViewModel.loadGame(extraData);
                 Toast.makeText(this.getContext(), "Game Loaded Successfully", Toast.LENGTH_SHORT).show();
-                //mCallback.loadGame(extraData);
-                //Navigation.findNavController(V).navigate(R.id.nav_game);
                 dialog.dismiss();
             }
         });

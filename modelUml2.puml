@@ -1,0 +1,238 @@
+@startuml
+class com.example.quadwrangle.game_model.Board {
++ {static} int size
+# int[][] board
+# int pl1squares
+# int pl2squares
+# int currentPlayer
++ <<Create>> Board(int)
++ <<Create>> Board(int,int[][],int)
++ <<Create>> Board()
++ int[][] getBoard()
++ int getSize()
++ void printboard()
+- void assembleStart()
++ void nextPlayer()
+# void growth(Square)
++ void setBoard(int[][])
++ void placeRock(Square)
++ void removeRock(Square)
+# void slide(Square,Square)
++ boolean isLegalMoveForGrowth(Square)
++ boolean isLegalMove(Square,Square)
++ int isLegalMoveInt(Square,Square)
++ void updateScores()
++ void moveVoid(Square,Square)
++ boolean move(Square,Square)
+# boolean isLegalMoveForSlide(Square,Square)
+# boolean moveSlide(int,int,int,int,int,int)
+- int getValue(Square)
+# boolean areFriendlyNeighboursAround(ArrayList<Square>)
+# void turnOverEnemiesAround(ArrayList<Square>)
++ int getCurrentPlayer()
++ int getPl1squares()
++ int getPl2squares()
++ void print(String)
++ void println(String)
++ int getPlaced(int)
++ boolean isGameOver()
+- boolean checkANYPossibleMoveOnBoard()
+# boolean checkANYPossibleSlideORGrowthOnBoard()
++ boolean isEmptySquare(Square)
++ int getWinner()
+- boolean checkAvailableSlide(Square)
+- boolean checkAvailableGrowth(Square)
+- boolean checkAvailableDrop(Square)
+# void drop(Square)
+# boolean isLegalMoveForDrop(Square)
+- boolean areAnyEmpty(ArrayList<Square>)
++ int getScore(int)
+}
+class com.example.quadwrangle.game_model.database.UserDbManager {
++ {static} String TABLE_PRODUCT
++ {static} String COLUMN_ID
++ {static} String COLUMN_NAME
++ {static} String COLUMN_PASSWORD
++ {static} String COLUMN_HIGH_SCORE
++ {static} String TableName
++ {static} String CREATE_TABLE
+~ String[] allColumns
++ <<Create>> UserDbManager(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void updateScore(int,long)
++ SQLiteDatabase open()
++ void closeDatabase()
++ User createUser(User)
++ ArrayList<User> getAllUsers()
++ boolean doesExistWithTheSameName(String)
++ User logIn(String,String)
++ long getIdForUsername(String)
++ long getScoreForUsername(String)
+}
+class com.example.quadwrangle.game_model.database.User {
+- long id
+- String name
+- String password
+- int highScore
++ <<Create>> User(String,String,int)
++ <<Create>> User(long,String,String,int)
++ long getId()
++ void setId(long)
++ String getName()
++ String getPassword()
++ int getHighScore()
++ String toString()
+}
+class com.example.quadwrangle.game_model.Move {
+- Square sq1
+- Square sq2
+- String type
++ <<Create>> Move(Square,Square,String)
++ Square getSq1()
++ Square getSq2()
++ String toString()
++ String getType()
+}
+class com.example.quadwrangle.game_model.database.UserInLeaderboard {
+- String username
+- int score
++ <<Create>> UserInLeaderboard(String,int)
++ String getUsername()
++ int getScore()
+}
+class com.example.quadwrangle.game_model.AlphaBeta {
+~ {static} int MAX_PLAYER
++ {static} Move bestMove(AlphaBetaBoard)
++ {static} int minimax(AlphaBetaBoard,int,int,int)
+}
+class com.example.quadwrangle.game_model.MyService {
+~ {static} boolean working
+- MediaPlayer player
++ IBinder onBind(Intent)
++ int onStartCommand(Intent,int,int)
++ {static} void setWorking()
++ {static} boolean getWorking()
++ void onDestroy()
+}
+class com.example.quadwrangle.game_model.database.SavedGame {
+- long gameId
+- long userId
+- String saveName
+- String dateSaved
+- String board
+- String nextPlayer
+- String gameType
++ <<Create>> SavedGame(long,long,String,String,String,String,String)
++ <<Create>> SavedGame(long,String,String,String,String,String)
++ void setId(long)
++ long getGameId()
++ long getUserId()
++ String getSaveName()
++ String getDateSaved()
++ String getBoard()
++ String getNextPlayer()
++ String getGameType()
++ String toString()
+}
+class com.example.quadwrangle.game_model.Model {
+# Board board
+- MutableLiveData<int[][]> mBoard
+- MutableLiveData<Integer> mTurn
+- MutableLiveData<Integer> mWinner
+- MutableLiveData<Square> mPressed_for_slide
+- MutableLiveData<Square> last_mPressed_for_slide
+- MutableLiveData<Integer> player1Score
+- MutableLiveData<Integer> player2Score
+- MutableLiveData<Boolean> isAI
++ <<Create>> Model(int)
++ MutableLiveData<int[][]> getmBoard()
++ MutableLiveData<Integer> getmTurn()
++ MutableLiveData<Integer> getmWinner()
++ MutableLiveData<Square> getmPressed_for_slide()
++ MutableLiveData<Square> getLast_mPressed_for_slide()
++ MutableLiveData<Integer> getPlayer1Score()
++ MutableLiveData<Boolean> getIsAI()
++ MutableLiveData<Integer> getPlayer2Score()
++ boolean isGameOver()
++ void updateWinner()
++ boolean legalMove(Square,Square)
++ boolean doMove(Square)
++ void doMoveAI()
++ void newGame(boolean)
++ void loadGame(int[][],int,boolean)
+}
+class com.example.quadwrangle.game_model.database.GameInSavedGamesPage {
+- String name
+- String date
+- String type
+- long id
++ <<Create>> GameInSavedGamesPage(String,String,String,long)
++ String getName()
++ String getType()
++ long getId()
++ String getDate()
+}
+class com.example.quadwrangle.game_model.AlphaBetaBoard {
+~ {static} int MAX_DEPTH
+- int depth
+- int val
+- Move move
++ <<Create>> AlphaBetaBoard(Board)
++ <<Create>> AlphaBetaBoard(AlphaBetaBoard)
++ void setMove(Move)
++ int getDepth()
++ void setVal(int)
++ int getVal()
++ Move getMove()
++ List<AlphaBetaBoard> getNextBoards()
+- void updateBoard(int[][])
++ List<AlphaBetaBoard> IterateNextBoards()
++ {static} void doMove(Move,AlphaBetaBoard)
++ List<AlphaBetaBoard> getNextBestBoards(int)
++ ArrayList<Move> getGrowthMovesForSquare(Square)
++ ArrayList<Move> getSlideMovesForSquare(Square)
++ ArrayList<Move> getDropMovesForSquare(Square)
++ void printAllMovesForBoard()
++ int evaluateBoard()
+}
+class com.example.quadwrangle.game_model.database.SavedGamesDbManager {
++ {static} String TABLE_PRODUCT
++ {static} String COLUMN_GAME_ID
++ {static} String COLUMN_USER_ID
++ {static} String COLUMN_SAVE_NAME
++ {static} String COLUMN_SAVE_DATE
++ {static} String COLUMN_BOARD
++ {static} String COLUMN_NEXT_PLAYER
++ {static} String COLUMN_GAME_TYPE
++ {static} String TableName
++ {static} String CREATE_TABLE
+~ String[] allColumns
++ <<Create>> SavedGamesDbManager(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ SQLiteDatabase open()
++ void closeDatabase()
++ SavedGame createSavedGame(SavedGame)
++ ArrayList<SavedGame> getAllGamesForUser(long)
++ SavedGame getGameById(long)
+}
+class com.example.quadwrangle.game_model.Square {
+- int row
+- int col
++ <<Create>> Square(int,int)
++ int getRow()
++ int getCol()
++ {static} boolean inLimit(int,int)
++ ArrayList<Square> getNeighboursNoDiagonals()
++ ArrayList<Square> getNeighboursWithDiagonals()
++ boolean equals(Square)
++ String toString()
+}
+
+
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.UserDbManager
+android.app.Service <|-- com.example.quadwrangle.game_model.MyService
+com.example.quadwrangle.game_model.Board <|-- com.example.quadwrangle.game_model.AlphaBetaBoard
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.SavedGamesDbManager
+@enduml

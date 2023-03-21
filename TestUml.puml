@@ -1,0 +1,914 @@
+@startuml
+class com.example.quadwrangle.game_view.AnimationActivity {
+~ int numOfImages
+~ boolean stopAnimation
+~ boolean startGame
+- int[] animationId
+~ AnimationActivity.MyHandler handler
+~ ImageView background
+# void onCreate(Bundle)
++ void initAnimation()
++ void start()
++ void onClick(View)
+}
+class com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif {
+- int i
+- String name
++ <<Create>> AnimatedGif(String)
++ void run()
+- void sendCounter2Activity(int)
+}
+class com.example.quadwrangle.game_view.AnimationActivity.MyHandler {
++ void handleMessage(Message)
+}
+class com.example.quadwrangle.game_view.SquareButton {
+- {static} int black_img
+- {static} int white_img
+- {static} int black_img_glow
+- {static} int white_img_glow
+- int row
+- int col
++ <<Create>> SquareButton(Context,int,int)
++ int getRow()
++ int getCol()
++ void setPressedImg(int)
++ void setPlayerImg(int)
+}
+class com.example.quadwrangle.databinding.NavHeaderDrawerBinding {
+- ConstraintLayout rootView
++ TextView HighscoreText
++ TextView UsernameText
+- <<Create>> NavHeaderDrawerBinding(ConstraintLayout,TextView,TextView)
++ ConstraintLayout getRoot()
++ {static} NavHeaderDrawerBinding inflate(LayoutInflater)
++ {static} NavHeaderDrawerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} NavHeaderDrawerBinding bind(View)
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment {
+- FragmentSavedGamesBinding binding
+- RecyclerView savedGamesRecyclerView
+- ArrayList<GameInSavedGamesPage> gamesArrayList
+- MySavedGamesAdapter myAdapter
+- UserDbLeaderboardConnector userDbLeaderboardConnector
+- SavedGamesDbConnector savedGamesDbConnector
+- GameViewModel gameViewModel
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void getData()
++ void onItemClick(int)
+}
+interface androidx.databinding.DataBindingComponent {
+}
+class com.example.quadwrangle.DataBindingTriggerClass {
+}
+class com.example.quadwrangle.game_model.database.UserInLeaderboard {
+- String username
+- int score
++ <<Create>> UserInLeaderboard(String,int)
++ String getUsername()
++ int getScore()
+}
+class com.example.quadwrangle.databinding.UserListItemBinding {
+- ConstraintLayout rootView
++ TextView scoreText
++ TextView usernameText
++ View view
+- <<Create>> UserListItemBinding(ConstraintLayout,TextView,TextView,View)
++ ConstraintLayout getRoot()
++ {static} UserListItemBinding inflate(LayoutInflater)
++ {static} UserListItemBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} UserListItemBinding bind(View)
+}
+class com.example.quadwrangle.databinding.LoadGameDialogBinding {
+- ConstraintLayout rootView
++ ImageView imageView13
++ TextView loadDate
++ TextView loadName
++ TextView loadType
++ TextView loadType3
++ TextView loadYes
++ ImageView loadYesButton
++ TextView textView5
+- <<Create>> LoadGameDialogBinding(ConstraintLayout,ImageView,TextView,TextView,TextView,TextView,TextView,ImageView,TextView)
++ ConstraintLayout getRoot()
++ {static} LoadGameDialogBinding inflate(LayoutInflater)
++ {static} LoadGameDialogBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} LoadGameDialogBinding bind(View)
+}
+class com.example.quadwrangle.databinding.FragmentGameBindingLandImpl {
+- {static} androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes
+- {static} android.util.SparseIntArray sViewsWithIds
+- long mDirtyFlags
++ <<Create>> FragmentGameBindingLandImpl(androidx.databinding.DataBindingComponent,View)
+- <<Create>> FragmentGameBindingLandImpl(androidx.databinding.DataBindingComponent,View,Object[])
++ void invalidateAll()
++ boolean hasPendingBindings()
++ boolean setVariable(int,Object)
++ void setViewModel(com.example.quadwrangle.game_view_model.ViewModelGame)
+# boolean onFieldChange(int,Object,int)
+# void executeBindings()
+}
+class com.example.quadwrangle.game_model.database.SavedGame {
+- long gameId
+- long userId
+- String saveName
+- String dateSaved
+- String board
+- String nextPlayer
+- String gameType
++ <<Create>> SavedGame(long,long,String,String,String,String,String)
++ <<Create>> SavedGame(long,String,String,String,String,String)
++ void setId(long)
++ long getGameId()
++ long getUserId()
++ String getSaveName()
++ String getDateSaved()
++ String getBoard()
++ String getNextPlayer()
++ String getGameType()
++ String toString()
+}
+class com.example.quadwrangle.game_model.Model {
+# Board board
+- MutableLiveData<int[][]> mBoard
+- MutableLiveData<Integer> mTurn
+- MutableLiveData<Integer> mWinner
+- MutableLiveData<Square> mPressed_for_slide
+- MutableLiveData<Square> last_mPressed_for_slide
+- MutableLiveData<Integer> player1Score
+- MutableLiveData<Integer> player2Score
+- MutableLiveData<Boolean> isAI
++ <<Create>> Model(int)
++ MutableLiveData<int[][]> getmBoard()
++ MutableLiveData<Integer> getmTurn()
++ MutableLiveData<Integer> getmWinner()
++ MutableLiveData<Square> getmPressed_for_slide()
++ MutableLiveData<Square> getLast_mPressed_for_slide()
++ MutableLiveData<Integer> getPlayer1Score()
++ MutableLiveData<Boolean> getIsAI()
++ MutableLiveData<Integer> getPlayer2Score()
++ boolean isGameOver()
++ void updateWinner()
++ boolean legalMove(Square,Square)
++ boolean doMove(Square)
++ void doMoveAI()
++ void newGame(boolean)
++ void loadGame(int[][],int,boolean)
+}
+abstract class com.example.quadwrangle.databinding.ActivityMainBinding {
++ ImageView board
++ ImageView changeModeButton
++ ImageView changeModeButton2
++ ImageView currentColor2
++ ImageView currentColorImage
++ TextView currentPlayer2
++ TextView currentPlayerText
++ TextView gameType2
++ TextView gameTypeText
++ ImageView imageView2
++ ImageView imageView3
++ ImageView imageView7
++ ImageView imageView8
++ ConstraintLayout layout
++ ImageView saveGameButton
++ ImageView saveGameButton2
++ TextView score1
++ TextView score2
+# ViewModelGame mViewModel
+# <<Create>> ActivityMainBinding(Object,View,int,ImageView,ImageView,ImageView,ImageView,ImageView,TextView,TextView,TextView,TextView,ImageView,ImageView,ImageView,ImageView,ConstraintLayout,ImageView,ImageView,TextView,TextView)
++ {abstract}void setViewModel(ViewModelGame)
++ ViewModelGame getViewModel()
++ {static} ActivityMainBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityMainBinding inflate(LayoutInflater,ViewGroup,boolean,Object)
++ {static} ActivityMainBinding inflate(LayoutInflater)
++ {static} ActivityMainBinding inflate(LayoutInflater,Object)
++ {static} ActivityMainBinding bind(View)
++ {static} ActivityMainBinding bind(View,Object)
+}
+class com.example.quadwrangle.game_view.DrawerActivity {
+- AppBarConfiguration mAppBarConfiguration
+- ActivityDrawerBinding binding
+- UserDbLeaderboardConnector userDbLeaderboardConnector
+# void onCreate(Bundle)
++ void setDrawerHeader()
++ boolean onCreateOptionsMenu(Menu)
++ boolean onSupportNavigateUp()
++ void stopOrStartMusic(View)
++ boolean onOptionsItemSelected(MenuItem)
++ boolean handleMenu(MenuItem)
+- void openHowToPlayDialog()
+}
+class com.example.quadwrangle.databinding.FragmentLeaderboardBindingImpl {
+- {static} androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes
+- {static} android.util.SparseIntArray sViewsWithIds
+- androidx.constraintlayout.widget.ConstraintLayout mboundView0
+- long mDirtyFlags
++ <<Create>> FragmentLeaderboardBindingImpl(androidx.databinding.DataBindingComponent,View)
+- <<Create>> FragmentLeaderboardBindingImpl(androidx.databinding.DataBindingComponent,View,Object[])
++ void invalidateAll()
++ boolean hasPendingBindings()
++ boolean setVariable(int,Object)
+# boolean onFieldChange(int,Object,int)
+# void executeBindings()
+}
+abstract class com.example.quadwrangle.databinding.FragmentSavedGamesBinding {
++ RecyclerView savedGamesRecyclerView
++ TextView secondTitle
++ TextView secondTitle2
++ TextView secondTitle3
++ TextView textView4
+# <<Create>> FragmentSavedGamesBinding(Object,View,int,RecyclerView,TextView,TextView,TextView,TextView)
++ {static} FragmentSavedGamesBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentSavedGamesBinding inflate(LayoutInflater,ViewGroup,boolean,Object)
++ {static} FragmentSavedGamesBinding inflate(LayoutInflater)
++ {static} FragmentSavedGamesBinding inflate(LayoutInflater,Object)
++ {static} FragmentSavedGamesBinding bind(View)
++ {static} FragmentSavedGamesBinding bind(View,Object)
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter {
+~ Context context
+~ ArrayList<GameInSavedGamesPage> savedGamesArrayList
+- IClickable iClickable
++ <<Create>> MySavedGamesAdapter(Context,ArrayList<GameInSavedGamesPage>,IClickable)
++ MyViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyViewHolder,int)
++ int getItemCount()
++ void onItemClick(int)
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder {
+~ TextView save_name_text
+~ TextView type_text
+~ TextView date_text
++ <<Create>> MyViewHolder(View,IClickable)
+}
+class com.example.quadwrangle.game_model.Square {
+- int row
+- int col
++ <<Create>> Square(int,int)
++ int getRow()
++ int getCol()
++ {static} boolean inLimit(int,int)
++ ArrayList<Square> getNeighboursNoDiagonals()
++ ArrayList<Square> getNeighboursWithDiagonals()
++ boolean equals(Square)
++ String toString()
+}
+class com.example.quadwrangle.game_view_model.ViewModelGame {
+- MutableLiveData<Integer> winner
++ MutableLiveData<int[][]> mBoard
++ MutableLiveData<Integer> mTurn
++ MutableLiveData<Integer> player1Score
++ MutableLiveData<Integer> player2Score
++ MutableLiveData<Square> mPressed_for_slide
++ MutableLiveData<Square> last_mPressed_for_slide
++ MutableLiveData<Boolean> isAI
+- Model game
+- {static} int SIZE
++ <<Create>> ViewModelGame()
++ MutableLiveData<Square> getmPressed_for_slide()
++ MutableLiveData<Square> getLast_mPressed_for_slide()
++ void run()
++ MutableLiveData<Integer> getmTurn()
++ int getPlayer1Score()
++ int getPlayer2Score()
++ boolean onTileClick(int,int)
++ void doMoveAI()
++ boolean isGameOver()
++ MutableLiveData<Integer> getWinner()
+}
+class com.example.quadwrangle.databinding.RulesDialogBinding {
+- ConstraintLayout rootView
++ TextView instructions
++ TextView instructions2
++ TextView instructions3
++ TextView instructions4
++ TextView instructions5
++ TextView textTitle
++ TextView textTitle2
++ TextView textTitle3
+- <<Create>> RulesDialogBinding(ConstraintLayout,TextView,TextView,TextView,TextView,TextView,TextView,TextView,TextView)
++ ConstraintLayout getRoot()
++ {static} RulesDialogBinding inflate(LayoutInflater)
++ {static} RulesDialogBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} RulesDialogBinding bind(View)
+}
+class com.example.quadwrangle.databinding.ActivityDrawerBinding {
+- DrawerLayout rootView
++ AppBarDrawerBinding appBarDrawer
++ DrawerLayout drawerLayout
++ ImageView music
++ NavigationView navView
+- <<Create>> ActivityDrawerBinding(DrawerLayout,AppBarDrawerBinding,DrawerLayout,ImageView,NavigationView)
++ DrawerLayout getRoot()
++ {static} ActivityDrawerBinding inflate(LayoutInflater)
++ {static} ActivityDrawerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityDrawerBinding bind(View)
+}
+class com.example.quadwrangle.databinding.ChangeModeDialogBinding {
+- ConstraintLayout rootView
++ TextView AI
++ TextView areYouSure
++ TextView changeTitle
++ ImageView imageView10
++ ImageView imageView11
++ ImageView imageView12
++ TextView saveBefore
++ TextView twoPlayer
++ TextView yes
++ ImageView yesbttn
+- <<Create>> ChangeModeDialogBinding(ConstraintLayout,TextView,TextView,TextView,ImageView,ImageView,ImageView,TextView,TextView,TextView,ImageView)
++ ConstraintLayout getRoot()
++ {static} ChangeModeDialogBinding inflate(LayoutInflater)
++ {static} ChangeModeDialogBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ChangeModeDialogBinding bind(View)
+}
+class com.example.quadwrangle.game_view.ui.game.GameFragment {
+- FragmentGameBinding binding
+- ConstraintLayout layout
+- GameViewModel viewModel
+- SquareButton[][] board
+- ImageView save_game
+- ImageView change_mode
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onDestroyView()
++ void SAVE_GAME(View)
++ void CHANGE_MODE(View)
+- void createBoard()
++ void game_over_dialog()
++ boolean handleHighScore()
+}
+class com.example.quadwrangle.game_model.database.User {
+- long id
+- String name
+- String password
+- int highScore
++ <<Create>> User(String,String,int)
++ <<Create>> User(long,String,String,int)
++ long getId()
++ void setId(long)
++ String getName()
++ String getPassword()
++ int getHighScore()
++ String toString()
+}
+class com.example.quadwrangle.databinding.SavedGameListItemBinding {
+- ConstraintLayout rootView
++ View background
++ TextView dateText
++ TextView saveNameText
++ TextView typeText
+- <<Create>> SavedGameListItemBinding(ConstraintLayout,View,TextView,TextView,TextView)
++ ConstraintLayout getRoot()
++ {static} SavedGameListItemBinding inflate(LayoutInflater)
++ {static} SavedGameListItemBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} SavedGameListItemBinding bind(View)
+}
+class com.example.quadwrangle.BuildConfig {
++ {static} boolean DEBUG
++ {static} String APPLICATION_ID
++ {static} String BUILD_TYPE
++ {static} int VERSION_CODE
++ {static} String VERSION_NAME
+}
+class com.example.quadwrangle.DataBinderMapperImpl {
+- {static} int LAYOUT_ACTIVITYMAIN
+- {static} int LAYOUT_FRAGMENTGAME
+- {static} int LAYOUT_FRAGMENTLEADERBOARD
+- {static} int LAYOUT_FRAGMENTSAVEDGAMES
+- {static} SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP
++ ViewDataBinding getDataBinder(DataBindingComponent,View,int)
++ ViewDataBinding getDataBinder(DataBindingComponent,View[],int)
++ int getLayoutId(String)
++ String convertBrIdToString(int)
++ List<DataBinderMapper> collectDependencies()
+}
+class com.example.quadwrangle.DataBinderMapperImpl.InnerBrLookup {
+~ {static} SparseArray<String> sKeys
+}
+class com.example.quadwrangle.DataBinderMapperImpl.InnerLayoutIdLookup {
+~ {static} HashMap<String,Integer> sKeys
+}
+interface com.example.quadwrangle.game_view.ui.saved_games.IClickable {
+~ void onItemClick(int)
+}
+class com.example.quadwrangle.game_view.OpeningScreenActivity {
+# void onCreate(Bundle)
++ void startOnClick()
++ void onUserInteraction()
+}
+class com.example.quadwrangle.ExampleUnitTest {
++ void addition_isCorrect()
+}
+class com.example.quadwrangle.databinding.SaveGameDialogBinding {
+- ConstraintLayout rootView
++ ImageView imageView5
++ ImageView save
++ EditText saveText
++ TextView textView3
+- <<Create>> SaveGameDialogBinding(ConstraintLayout,ImageView,ImageView,EditText,TextView)
++ ConstraintLayout getRoot()
++ {static} SaveGameDialogBinding inflate(LayoutInflater)
++ {static} SaveGameDialogBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} SaveGameDialogBinding bind(View)
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter {
+~ Context context
+~ ArrayList<UserInLeaderboard> usersArrayList
++ <<Create>> MyUsernameAdapter(Context,ArrayList<UserInLeaderboard>)
++ MyViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyViewHolder,int)
++ int getItemCount()
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder {
+~ TextView username_txt
+~ TextView score_txt
++ <<Create>> MyViewHolder(View)
+}
+class com.example.quadwrangle.game_model.AlphaBetaBoard {
+~ {static} int MAX_DEPTH
+- int depth
+- int val
+- Move move
++ <<Create>> AlphaBetaBoard(Board)
++ <<Create>> AlphaBetaBoard(AlphaBetaBoard)
++ void setMove(Move)
++ int getDepth()
++ void setVal(int)
++ int getVal()
++ Move getMove()
++ List<AlphaBetaBoard> getNextBoards()
+- void updateBoard(int[][])
++ List<AlphaBetaBoard> IterateNextBoards()
++ {static} void doMove(Move,AlphaBetaBoard)
++ List<AlphaBetaBoard> getNextBestBoards(int)
++ ArrayList<Move> getGrowthMovesForSquare(Square)
++ ArrayList<Move> getSlideMovesForSquare(Square)
++ ArrayList<Move> getDropMovesForSquare(Square)
++ void printAllMovesForBoard()
++ int evaluateBoard()
+}
+class com.example.quadwrangle.databinding.ActivityMainBindingImpl {
+- {static} androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes
+- {static} android.util.SparseIntArray sViewsWithIds
+- long mDirtyFlags
++ <<Create>> ActivityMainBindingImpl(androidx.databinding.DataBindingComponent,View)
+- <<Create>> ActivityMainBindingImpl(androidx.databinding.DataBindingComponent,View,Object[])
++ void invalidateAll()
++ boolean hasPendingBindings()
++ boolean setVariable(int,Object)
++ void setViewModel(com.example.quadwrangle.game_view_model.ViewModelGame)
+# boolean onFieldChange(int,Object,int)
+# void executeBindings()
+}
+class com.example.quadwrangle.game_view.ui.game.GameViewModel {
++ MutableLiveData<Integer> mWinner
++ MutableLiveData<int[][]> mBoard
++ MutableLiveData<Integer> mTurn
++ MutableLiveData<Integer> player1Score
++ MutableLiveData<Integer> player2Score
++ MutableLiveData<Square> mPressed_for_slide
++ MutableLiveData<Square> last_mPressed_for_slide
++ MutableLiveData<Boolean> isAI
++ SavedGamesDbConnector savedGamesDbConnector
++ UserDbLeaderboardConnector userDbLeaderboardConnector
+- Model model
+- {static} int SIZE
++ <<Create>> GameViewModel(Application)
++ MutableLiveData<Square> getmPressed_for_slide()
++ MutableLiveData<Square> getLast_mPressed_for_slide()
++ void run()
++ MutableLiveData<Integer> getmTurn()
++ int getPlayer1Score()
++ int getPlayer2Score()
++ boolean onTileClick(int,int)
++ void doMoveAI()
++ void saveGame(String)
++ int[][] getBoard()
++ boolean isGameOver()
++ void newGame(Context,boolean)
++ void loadGame(SavedGame)
+- int[][] makeIntBoard(String)
++ boolean handleHighScore()
++ String getWinner()
++ String getResultForClick(int,int)
+}
+abstract class com.example.quadwrangle.databinding.FragmentGameBinding {
++ ImageView board
++ ImageView changeModeButton
++ ImageView currentColorImage
++ TextView currentPlayerText
++ TextView gameTypeText
++ ImageView imageView
++ ImageView imageView2
++ ImageView imageView3
++ ImageView imageView4
++ ConstraintLayout layout
++ ImageView saveGameButton
++ TextView score1
++ TextView score2
++ TextView textView2
+# ViewModelGame mViewModel
+# <<Create>> FragmentGameBinding(Object,View,int,ImageView,ImageView,ImageView,TextView,TextView,ImageView,ImageView,ImageView,ImageView,ConstraintLayout,ImageView,TextView,TextView,TextView)
++ {abstract}void setViewModel(ViewModelGame)
++ ViewModelGame getViewModel()
++ {static} FragmentGameBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentGameBinding inflate(LayoutInflater,ViewGroup,boolean,Object)
++ {static} FragmentGameBinding inflate(LayoutInflater)
++ {static} FragmentGameBinding inflate(LayoutInflater,Object)
++ {static} FragmentGameBinding bind(View)
++ {static} FragmentGameBinding bind(View,Object)
+}
+class com.example.quadwrangle.game_model.Board {
++ {static} int size
+# int[][] board
+# int pl1squares
+# int pl2squares
+# int currentPlayer
++ <<Create>> Board(int)
++ <<Create>> Board(int,int[][],int)
++ <<Create>> Board()
++ int[][] getBoard()
++ int getSize()
++ void printboard()
+- void assembleStart()
++ void nextPlayer()
+# void growth(Square)
++ void setBoard(int[][])
++ void placeRock(Square)
++ void removeRock(Square)
+# void slide(Square,Square)
++ boolean isLegalMoveForGrowth(Square)
++ boolean isLegalMove(Square,Square)
++ int isLegalMoveInt(Square,Square)
++ void updateScores()
++ void moveVoid(Square,Square)
++ boolean move(Square,Square)
+# boolean isLegalMoveForSlide(Square,Square)
+# boolean moveSlide(int,int,int,int,int,int)
+- int getValue(Square)
+# boolean areFriendlyNeighboursAround(ArrayList<Square>)
+# void turnOverEnemiesAround(ArrayList<Square>)
++ int getCurrentPlayer()
++ int getPl1squares()
++ int getPl2squares()
++ void print(String)
++ void println(String)
++ int getPlaced(int)
++ boolean isGameOver()
+- boolean checkANYPossibleMoveOnBoard()
+# boolean checkANYPossibleSlideORGrowthOnBoard()
++ boolean isEmptySquare(Square)
++ int getWinner()
+- boolean checkAvailableSlide(Square)
+- boolean checkAvailableGrowth(Square)
+- boolean checkAvailableDrop(Square)
+# void drop(Square)
+# boolean isLegalMoveForDrop(Square)
+- boolean areAnyEmpty(ArrayList<Square>)
++ int getScore(int)
+}
+class com.example.quadwrangle.databinding.ContentDrawerBinding {
+- ConstraintLayout rootView
+- <<Create>> ContentDrawerBinding(ConstraintLayout)
++ ConstraintLayout getRoot()
++ {static} ContentDrawerBinding inflate(LayoutInflater)
++ {static} ContentDrawerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ContentDrawerBinding bind(View)
+}
+class com.example.quadwrangle.databinding.FragmentSavedGamesBindingImpl {
+- {static} androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes
+- {static} android.util.SparseIntArray sViewsWithIds
+- androidx.constraintlayout.widget.ConstraintLayout mboundView0
+- long mDirtyFlags
++ <<Create>> FragmentSavedGamesBindingImpl(androidx.databinding.DataBindingComponent,View)
+- <<Create>> FragmentSavedGamesBindingImpl(androidx.databinding.DataBindingComponent,View,Object[])
++ void invalidateAll()
++ boolean hasPendingBindings()
++ boolean setVariable(int,Object)
+# boolean onFieldChange(int,Object,int)
+# void executeBindings()
+}
+class com.example.quadwrangle.game_model.AlphaBeta {
+~ {static} int MAX_PLAYER
++ {static} Move bestMove(AlphaBetaBoard)
++ {static} int minimax(AlphaBetaBoard,int,int,int)
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel {
+- MutableLiveData<String> mText
++ <<Create>> LeaderboardViewModel()
++ LiveData<String> getText()
+}
+class com.example.quadwrangle.game_view_model.SavedGamesDbConnector {
+- SavedGamesDbManager manager
++ <<Create>> SavedGamesDbConnector(Context)
++ GameInSavedGamesPage[] getAllSavedGamesForPage(long)
++ void saveGame(int[][],String,int,boolean)
++ {static} String board_toString(int[][])
++ {static} String date_ToString(long)
++ SavedGame getExtraGameData(long)
+}
+class com.example.quadwrangle.game_model.database.GameInSavedGamesPage {
+- String name
+- String date
+- String type
+- long id
++ <<Create>> GameInSavedGamesPage(String,String,String,long)
++ String getName()
++ String getType()
++ long getId()
++ String getDate()
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment {
+- FragmentLeaderboardBinding binding
+- RecyclerView recyclerView
+- ArrayList<UserInLeaderboard> usersArrayList
+- MyUsernameAdapter myAdapter
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+- void getData()
+- void createUserTest()
+}
+class androidx.databinding.library.baseAdapters.BR {
++ {static} int _all
++ {static} int viewModel
+}
+class com.example.quadwrangle.databinding.FragmentGameBindingImpl {
+- {static} androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes
+- {static} android.util.SparseIntArray sViewsWithIds
+- long mDirtyFlags
++ <<Create>> FragmentGameBindingImpl(androidx.databinding.DataBindingComponent,View)
+- <<Create>> FragmentGameBindingImpl(androidx.databinding.DataBindingComponent,View,Object[])
++ void invalidateAll()
++ boolean hasPendingBindings()
++ boolean setVariable(int,Object)
++ void setViewModel(com.example.quadwrangle.game_view_model.ViewModelGame)
+# boolean onFieldChange(int,Object,int)
+# void executeBindings()
+}
+class com.example.quadwrangle.game_model.database.UserDbManager {
++ {static} String TABLE_PRODUCT
++ {static} String COLUMN_ID
++ {static} String COLUMN_NAME
++ {static} String COLUMN_PASSWORD
++ {static} String COLUMN_HIGH_SCORE
++ {static} String TableName
++ {static} String CREATE_TABLE
+~ String[] allColumns
++ <<Create>> UserDbManager(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void updateScore(int,long)
++ SQLiteDatabase open()
++ void closeDatabase()
++ User createUser(User)
++ ArrayList<User> getAllUsers()
++ boolean doesExistWithTheSameName(String)
++ User logIn(String,String)
++ long getIdForUsername(String)
++ long getScoreForUsername(String)
+}
+class com.example.quadwrangle.databinding.ActivityMainBindingLandImpl {
+- {static} androidx.databinding.ViewDataBinding.IncludedLayouts sIncludes
+- {static} android.util.SparseIntArray sViewsWithIds
+- long mDirtyFlags
++ <<Create>> ActivityMainBindingLandImpl(androidx.databinding.DataBindingComponent,View)
+- <<Create>> ActivityMainBindingLandImpl(androidx.databinding.DataBindingComponent,View,Object[])
++ void invalidateAll()
++ boolean hasPendingBindings()
++ boolean setVariable(int,Object)
++ void setViewModel(com.example.quadwrangle.game_view_model.ViewModelGame)
+# boolean onFieldChange(int,Object,int)
+# void executeBindings()
+}
+class androidx.databinding.DataBinderMapperImpl {
+~ <<Create>> DataBinderMapperImpl()
+}
+class com.example.quadwrangle.game_view.ConnectionActivity {
+- ImageView logInButton
+- ImageView signUpButton
+- ImageView chooseLogInButton
+- ImageView chooseSignUpButton
+- ImageView backButton
+- TextView usernameText
+- TextView passwordText
+- UserDbLeaderboardConnector userDbLeaderboardConnector
+- String myUsername
+# void onCreate(Bundle)
++ void openLogIn(View)
++ void openSignIn(View)
++ void backButton(View)
++ void openInsert()
++ void LogIn(View)
++ void SignUp(View)
++ void stopOrStartMusic(View)
+}
+class com.example.quadwrangle.ExampleInstrumentedTest {
++ void useAppContext()
+}
+class com.example.quadwrangle.game_model.Move {
+- Square sq1
+- Square sq2
+- String type
++ <<Create>> Move(Square,Square,String)
++ Square getSq1()
++ Square getSq2()
++ String toString()
++ String getType()
+}
+abstract class com.example.quadwrangle.databinding.FragmentLeaderboardBinding {
++ RecyclerView recyclerView
++ TextView textView2
+# <<Create>> FragmentLeaderboardBinding(Object,View,int,RecyclerView,TextView)
++ {static} FragmentLeaderboardBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} FragmentLeaderboardBinding inflate(LayoutInflater,ViewGroup,boolean,Object)
++ {static} FragmentLeaderboardBinding inflate(LayoutInflater)
++ {static} FragmentLeaderboardBinding inflate(LayoutInflater,Object)
++ {static} FragmentLeaderboardBinding bind(View)
++ {static} FragmentLeaderboardBinding bind(View,Object)
+}
+class com.example.quadwrangle.databinding.ActivityOpeningScreenBinding {
+- ConstraintLayout rootView
++ ImageView startBttn
+- <<Create>> ActivityOpeningScreenBinding(ConstraintLayout,ImageView)
++ ConstraintLayout getRoot()
++ {static} ActivityOpeningScreenBinding inflate(LayoutInflater)
++ {static} ActivityOpeningScreenBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityOpeningScreenBinding bind(View)
+}
+class com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector {
+- UserDbManager manager
+- {static} User MyUser
++ <<Create>> UserDbLeaderboardConnector(Context)
++ UserInLeaderboard[] getAllUsersInLeaderboard()
++ boolean doesAlreadyExist(String)
++ String signUp(String,String)
++ String logIn(String,String)
++ String getMyUsername()
++ long getMyHighScore()
++ long getMyId()
++ void updateScore(int)
+}
+class com.example.quadwrangle.databinding.AppBarDrawerBinding {
+- CoordinatorLayout rootView
++ Toolbar toolbar
+- <<Create>> AppBarDrawerBinding(CoordinatorLayout,Toolbar)
++ CoordinatorLayout getRoot()
++ {static} AppBarDrawerBinding inflate(LayoutInflater)
++ {static} AppBarDrawerBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} AppBarDrawerBinding bind(View)
+}
+class com.example.quadwrangle.game_model.MyService {
+~ {static} boolean working
+- MediaPlayer player
++ IBinder onBind(Intent)
++ int onStartCommand(Intent,int,int)
++ {static} void setWorking()
++ {static} boolean getWorking()
++ void onDestroy()
+}
+class com.example.quadwrangle.databinding.GameOverDialogBinding {
+- ConstraintLayout rootView
++ TextView ai
++ ImageView b1
++ ImageView b2
++ TextView highScore
++ ImageView imageView6
++ ImageView imageView9
++ TextView newGame
++ TextView textView
++ TextView twopl
++ TextView winner
+- <<Create>> GameOverDialogBinding(ConstraintLayout,TextView,ImageView,ImageView,TextView,ImageView,ImageView,TextView,TextView,TextView,TextView)
++ ConstraintLayout getRoot()
++ {static} GameOverDialogBinding inflate(LayoutInflater)
++ {static} GameOverDialogBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} GameOverDialogBinding bind(View)
+}
+class com.example.quadwrangle.BR {
++ {static} int _all
++ {static} int viewModel
+}
+class com.example.quadwrangle.game_model.database.SavedGamesDbManager {
++ {static} String TABLE_PRODUCT
++ {static} String COLUMN_GAME_ID
++ {static} String COLUMN_USER_ID
++ {static} String COLUMN_SAVE_NAME
++ {static} String COLUMN_SAVE_DATE
++ {static} String COLUMN_BOARD
++ {static} String COLUMN_NEXT_PLAYER
++ {static} String COLUMN_GAME_TYPE
++ {static} String TableName
++ {static} String CREATE_TABLE
+~ String[] allColumns
++ <<Create>> SavedGamesDbManager(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ SQLiteDatabase open()
++ void closeDatabase()
++ SavedGame createSavedGame(SavedGame)
++ ArrayList<SavedGame> getAllGamesForUser(long)
++ SavedGame getGameById(long)
+}
+class com.example.quadwrangle.game_view.MainActivity {
+- ConstraintLayout layout
+- ActivityMainBinding binding
+- ViewModelGame viewModel
+- SquareButton[][] board
+- TextView score1
+- TextView score2
+# void onCreate(Bundle)
+- void createBoard()
+}
+class com.example.quadwrangle.databinding.ActivityAnimationBinding {
+- ConstraintLayout rootView
++ ImageView background
++ Button button
+- <<Create>> ActivityAnimationBinding(ConstraintLayout,ImageView,Button)
++ ConstraintLayout getRoot()
++ {static} ActivityAnimationBinding inflate(LayoutInflater)
++ {static} ActivityAnimationBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityAnimationBinding bind(View)
+}
+class com.example.quadwrangle.databinding.ActivityConnectionBinding {
+- ConstraintLayout rootView
++ ImageView LogInButton
++ EditText PasswordText
++ ImageView SigninButton
++ EditText UsernameText
++ ImageView backButton
++ ImageView chooseLoginButton
++ ImageView chooseSignupButton
++ ImageView music
+- <<Create>> ActivityConnectionBinding(ConstraintLayout,ImageView,EditText,ImageView,EditText,ImageView,ImageView,ImageView,ImageView)
++ ConstraintLayout getRoot()
++ {static} ActivityConnectionBinding inflate(LayoutInflater)
++ {static} ActivityConnectionBinding inflate(LayoutInflater,ViewGroup,boolean)
++ {static} ActivityConnectionBinding bind(View)
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel {
+- MutableLiveData<String> mText
++ <<Create>> SavedGamesFragmentViewModel()
++ LiveData<String> getText()
++ void loadGame(SavedGame)
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.AnimationActivity
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.Thread <|-- com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.Handler <|-- com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.AppCompatImageView <|-- com.example.quadwrangle.game_view.SquareButton
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.NavHeaderDrawerBinding
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.UserListItemBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.LoadGameDialogBinding
+com.example.quadwrangle.databinding.FragmentGameBinding <|-- com.example.quadwrangle.databinding.FragmentGameBindingLandImpl
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.ActivityMainBinding
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.DrawerActivity
+com.example.quadwrangle.databinding.FragmentLeaderboardBinding <|-- com.example.quadwrangle.databinding.FragmentLeaderboardBindingImpl
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.FragmentSavedGamesBinding
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter +.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view_model.ViewModelGame
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.RulesDialogBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityDrawerBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ChangeModeDialogBinding
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.game.GameFragment
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.SavedGameListItemBinding
+androidx.databinding.DataBinderMapper <|-- com.example.quadwrangle.DataBinderMapperImpl
+com.example.quadwrangle.DataBinderMapperImpl +.. com.example.quadwrangle.DataBinderMapperImpl.InnerBrLookup
+com.example.quadwrangle.DataBinderMapperImpl +.. com.example.quadwrangle.DataBinderMapperImpl.InnerLayoutIdLookup
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.OpeningScreenActivity
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.SaveGameDialogBinding
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter
+com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter +.. com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_model.Board <|-- com.example.quadwrangle.game_model.AlphaBetaBoard
+com.example.quadwrangle.databinding.ActivityMainBinding <|-- com.example.quadwrangle.databinding.ActivityMainBindingImpl
+androidx.lifecycle.AndroidViewModel <|-- com.example.quadwrangle.game_view.ui.game.GameViewModel
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.FragmentGameBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ContentDrawerBinding
+com.example.quadwrangle.databinding.FragmentSavedGamesBinding <|-- com.example.quadwrangle.databinding.FragmentSavedGamesBindingImpl
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment
+com.example.quadwrangle.databinding.FragmentGameBinding <|-- com.example.quadwrangle.databinding.FragmentGameBindingImpl
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.UserDbManager
+com.example.quadwrangle.databinding.ActivityMainBinding <|-- com.example.quadwrangle.databinding.ActivityMainBindingLandImpl
+androidx.databinding.MergedDataBinderMapper <|-- androidx.databinding.DataBinderMapperImpl
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.ConnectionActivity
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.FragmentLeaderboardBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityOpeningScreenBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.AppBarDrawerBinding
+android.app.Service <|-- com.example.quadwrangle.game_model.MyService
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.GameOverDialogBinding
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.SavedGamesDbManager
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.MainActivity
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityAnimationBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityConnectionBinding
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel
+@enduml

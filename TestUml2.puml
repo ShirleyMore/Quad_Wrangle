@@ -1,0 +1,201 @@
+@startuml
+class com.example.quadwrangle.game_view.AnimationActivity {
+}
+class com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif {
+}
+class com.example.quadwrangle.game_view.AnimationActivity.MyHandler {
+}
+class com.example.quadwrangle.game_view.SquareButton {
+}
+class com.example.quadwrangle.databinding.NavHeaderDrawerBinding {
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment {
+}
+interface androidx.databinding.DataBindingComponent {
+}
+class com.example.quadwrangle.DataBindingTriggerClass {
+}
+class com.example.quadwrangle.game_model.database.UserInLeaderboard {
+}
+class com.example.quadwrangle.databinding.UserListItemBinding {
+}
+class com.example.quadwrangle.databinding.LoadGameDialogBinding {
+}
+class com.example.quadwrangle.databinding.FragmentGameBindingLandImpl {
+}
+class com.example.quadwrangle.game_model.database.SavedGame {
+}
+class com.example.quadwrangle.game_model.Model {
+}
+abstract class com.example.quadwrangle.databinding.ActivityMainBinding {
+}
+class com.example.quadwrangle.game_view.DrawerActivity {
+}
+class com.example.quadwrangle.databinding.FragmentLeaderboardBindingImpl {
+}
+abstract class com.example.quadwrangle.databinding.FragmentSavedGamesBinding {
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter {
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder {
+}
+class com.example.quadwrangle.game_model.Square {
+}
+class com.example.quadwrangle.game_view_model.ViewModelGame {
+}
+class com.example.quadwrangle.databinding.RulesDialogBinding {
+}
+class com.example.quadwrangle.databinding.ActivityDrawerBinding {
+}
+class com.example.quadwrangle.databinding.ChangeModeDialogBinding {
+}
+class com.example.quadwrangle.game_view.ui.game.GameFragment {
+}
+class com.example.quadwrangle.game_model.database.User {
+}
+class com.example.quadwrangle.databinding.SavedGameListItemBinding {
+}
+class com.example.quadwrangle.BuildConfig {
+}
+class com.example.quadwrangle.DataBinderMapperImpl {
+}
+class com.example.quadwrangle.DataBinderMapperImpl.InnerBrLookup {
+}
+class com.example.quadwrangle.DataBinderMapperImpl.InnerLayoutIdLookup {
+}
+interface com.example.quadwrangle.game_view.ui.saved_games.IClickable {
+}
+class com.example.quadwrangle.game_view.OpeningScreenActivity {
+}
+class com.example.quadwrangle.ExampleUnitTest {
+}
+class com.example.quadwrangle.databinding.SaveGameDialogBinding {
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter {
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder {
+}
+class com.example.quadwrangle.game_model.AlphaBetaBoard {
+}
+class com.example.quadwrangle.databinding.ActivityMainBindingImpl {
+}
+class com.example.quadwrangle.game_view.ui.game.GameViewModel {
+}
+abstract class com.example.quadwrangle.databinding.FragmentGameBinding {
+}
+class com.example.quadwrangle.game_model.Board {
+}
+class com.example.quadwrangle.databinding.ContentDrawerBinding {
+}
+class com.example.quadwrangle.databinding.FragmentSavedGamesBindingImpl {
+}
+class com.example.quadwrangle.game_model.AlphaBeta {
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel {
+}
+class com.example.quadwrangle.game_view_model.SavedGamesDbConnector {
+}
+class com.example.quadwrangle.game_model.database.GameInSavedGamesPage {
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment {
+}
+class androidx.databinding.library.baseAdapters.BR {
+}
+class com.example.quadwrangle.databinding.FragmentGameBindingImpl {
+}
+class com.example.quadwrangle.game_model.database.UserDbManager {
+}
+class com.example.quadwrangle.databinding.ActivityMainBindingLandImpl {
+}
+class androidx.databinding.DataBinderMapperImpl {
+}
+class com.example.quadwrangle.game_view.ConnectionActivity {
+}
+class com.example.quadwrangle.ExampleInstrumentedTest {
+}
+class com.example.quadwrangle.game_model.Move {
+}
+abstract class com.example.quadwrangle.databinding.FragmentLeaderboardBinding {
+}
+class com.example.quadwrangle.databinding.ActivityOpeningScreenBinding {
+}
+class com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector {
+}
+class com.example.quadwrangle.databinding.AppBarDrawerBinding {
+}
+class com.example.quadwrangle.game_model.MyService {
+}
+class com.example.quadwrangle.databinding.GameOverDialogBinding {
+}
+class com.example.quadwrangle.BR {
+}
+class com.example.quadwrangle.game_model.database.SavedGamesDbManager {
+}
+class com.example.quadwrangle.game_view.MainActivity {
+}
+class com.example.quadwrangle.databinding.ActivityAnimationBinding {
+}
+class com.example.quadwrangle.databinding.ActivityConnectionBinding {
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel {
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.AnimationActivity
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.Thread <|-- com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.Handler <|-- com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.AppCompatImageView <|-- com.example.quadwrangle.game_view.SquareButton
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.NavHeaderDrawerBinding
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.UserListItemBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.LoadGameDialogBinding
+com.example.quadwrangle.databinding.FragmentGameBinding <|-- com.example.quadwrangle.databinding.FragmentGameBindingLandImpl
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.ActivityMainBinding
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.DrawerActivity
+com.example.quadwrangle.databinding.FragmentLeaderboardBinding <|-- com.example.quadwrangle.databinding.FragmentLeaderboardBindingImpl
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.FragmentSavedGamesBinding
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter +.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view_model.ViewModelGame
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.RulesDialogBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityDrawerBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ChangeModeDialogBinding
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.game.GameFragment
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.SavedGameListItemBinding
+androidx.databinding.DataBinderMapper <|-- com.example.quadwrangle.DataBinderMapperImpl
+com.example.quadwrangle.DataBinderMapperImpl +.. com.example.quadwrangle.DataBinderMapperImpl.InnerBrLookup
+com.example.quadwrangle.DataBinderMapperImpl +.. com.example.quadwrangle.DataBinderMapperImpl.InnerLayoutIdLookup
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.OpeningScreenActivity
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.SaveGameDialogBinding
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter
+com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter +.. com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_model.Board <|-- com.example.quadwrangle.game_model.AlphaBetaBoard
+com.example.quadwrangle.databinding.ActivityMainBinding <|-- com.example.quadwrangle.databinding.ActivityMainBindingImpl
+androidx.lifecycle.AndroidViewModel <|-- com.example.quadwrangle.game_view.ui.game.GameViewModel
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.FragmentGameBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ContentDrawerBinding
+com.example.quadwrangle.databinding.FragmentSavedGamesBinding <|-- com.example.quadwrangle.databinding.FragmentSavedGamesBindingImpl
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment
+com.example.quadwrangle.databinding.FragmentGameBinding <|-- com.example.quadwrangle.databinding.FragmentGameBindingImpl
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.UserDbManager
+com.example.quadwrangle.databinding.ActivityMainBinding <|-- com.example.quadwrangle.databinding.ActivityMainBindingLandImpl
+androidx.databinding.MergedDataBinderMapper <|-- androidx.databinding.DataBinderMapperImpl
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.ConnectionActivity
+androidx.databinding.ViewDataBinding <|-- com.example.quadwrangle.databinding.FragmentLeaderboardBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityOpeningScreenBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.AppBarDrawerBinding
+android.app.Service <|-- com.example.quadwrangle.game_model.MyService
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.GameOverDialogBinding
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.SavedGamesDbManager
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.MainActivity
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityAnimationBinding
+androidx.viewbinding.ViewBinding <|.. com.example.quadwrangle.databinding.ActivityConnectionBinding
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel
+@enduml

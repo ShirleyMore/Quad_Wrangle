@@ -23,7 +23,6 @@ public class AlphaBetaBoard extends Board {
         this.depth = MAX_DEPTH;
         this.pl1squares = board.getPl1squares();
         this.pl2squares = board.getPl2squares();
-        //this.val = this.evaluateBoard();
     }
 
     public AlphaBetaBoard(AlphaBetaBoard board) {
@@ -177,6 +176,7 @@ public class AlphaBetaBoard extends Board {
         }
     }
 
+    // abs because in iterateNextBoards I do it times the current player
     public int evaluateBoard() {
         if (currentPlayer == 1)
             return pl1squares-pl2squares;

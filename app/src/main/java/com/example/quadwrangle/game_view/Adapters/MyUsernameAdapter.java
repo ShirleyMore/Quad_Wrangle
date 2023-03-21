@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class MyUsernameAdapter extends RecyclerView.Adapter<MyUsernameAdapter.MyViewHolder>{
 
-    Context context;
-    ArrayList<UserInLeaderboard> usersArrayList;
+    private Context context;
+    private ArrayList<UserInLeaderboard> usersArrayList;
 
     public MyUsernameAdapter(Context context, ArrayList<UserInLeaderboard> usersArrayList) {
         this.context = context;

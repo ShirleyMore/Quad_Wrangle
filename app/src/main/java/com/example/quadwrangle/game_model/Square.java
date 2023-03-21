@@ -43,7 +43,7 @@ public class Square {
         ArrayList<Square> lst = new ArrayList<Square>();
         for (int r = (this.row-1); r <= (this.row+1); r++)
             for (int c = (this.col-1); c <= (this.col+1); c++)
-                if (inLimit(r, c) && !(r == row && c == col)) /// !!!! added here
+                if (inLimit(r, c) && !(r == row && c == col))
                     lst.add(new Square(r, c));
         return lst;
     }

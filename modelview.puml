@@ -1,0 +1,50 @@
+@startuml
+class com.example.quadwrangle.game_view_model.SavedGamesDbConnector {
+- SavedGamesDbManager manager
++ <<Create>> SavedGamesDbConnector(Context)
++ GameInSavedGamesPage[] getAllSavedGamesForPage(long)
++ void saveGame(int[][],String,int,boolean)
++ {static} String board_toString(int[][])
++ {static} String date_ToString(long)
++ SavedGame getExtraGameData(long)
+}
+class com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector {
+- UserDbManager manager
+- {static} User MyUser
++ <<Create>> UserDbLeaderboardConnector(Context)
++ UserInLeaderboard[] getAllUsersInLeaderboard()
++ boolean doesAlreadyExist(String)
++ String signUp(String,String)
++ String logIn(String,String)
++ String getMyUsername()
++ long getMyHighScore()
++ long getMyId()
++ void updateScore(int)
+}
+class com.example.quadwrangle.game_view_model.ViewModelGame {
+- MutableLiveData<Integer> winner
++ MutableLiveData<int[][]> mBoard
++ MutableLiveData<Integer> mTurn
++ MutableLiveData<Integer> player1Score
++ MutableLiveData<Integer> player2Score
++ MutableLiveData<Square> mPressed_for_slide
++ MutableLiveData<Square> last_mPressed_for_slide
++ MutableLiveData<Boolean> isAI
+- Model game
+- {static} int SIZE
++ <<Create>> ViewModelGame()
++ MutableLiveData<Square> getmPressed_for_slide()
++ MutableLiveData<Square> getLast_mPressed_for_slide()
++ void run()
++ MutableLiveData<Integer> getmTurn()
++ int getPlayer1Score()
++ int getPlayer2Score()
++ boolean onTileClick(int,int)
++ void doMoveAI()
++ boolean isGameOver()
++ MutableLiveData<Integer> getWinner()
+}
+
+
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view_model.ViewModelGame
+@enduml

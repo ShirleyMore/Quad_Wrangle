@@ -41,8 +41,11 @@ public class DrawerActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         // initialize binding
+        // generate an instance of binding for the class to use
         binding = ActivityDrawerBinding.inflate(getLayoutInflater());
+        // getting the root view and making it the active view on screen
         setContentView(binding.getRoot());
+
         // handle music button
         boolean musicOnOrOff = MyService.getWorking();
         if (musicOnOrOff)
@@ -79,6 +82,7 @@ public class DrawerActivity extends AppCompatActivity{
     }
 
     public void setDrawerHeader() {
+        System.out.println("DRAWER HEADER UPDATED");
         TextView username_text = findViewById(R.id.Username_text);
         TextView score_text = findViewById(R.id.Highscore_text);
         username_text.setText("Hello " + userDbLeaderboardConnector.getMyUsername());

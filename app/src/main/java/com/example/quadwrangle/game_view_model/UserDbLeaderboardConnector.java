@@ -51,8 +51,8 @@ public class UserDbLeaderboardConnector {
         return this.MyUser.getName();
     }
 
-    public int getMyHighScore() {
-        return this.MyUser.getHighScore();
+    public long getMyHighScore() {
+        return manager.getScoreForUsername(getMyUsername());
     }
 
 

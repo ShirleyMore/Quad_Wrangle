@@ -48,7 +48,6 @@ public class UserDbManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(UserDbManager.COLUMN_HIGH_SCORE, newScore);
         database.update(UserDbManager.TABLE_PRODUCT, values, "id=" + id, null);
-        System.out.println("DATABASE updateScore USER " + id);
         database.close();
     }
 
@@ -67,6 +66,7 @@ public class UserDbManager extends SQLiteOpenHelper {
         SQLiteDatabase database = open();
         // if a user already has this name -> null
         if (doesExistWithTheSameName(user.getName())) {
+            closeDatabase();
             return null;
         }
         ContentValues values = new ContentValues();
@@ -76,13 +76,15 @@ public class UserDbManager extends SQLiteOpenHelper {
         long insertId = database.insert(UserDbManager.TABLE_PRODUCT, null, values);
         user.setId(insertId);
         System.out.println("DATABASE user inserted, id = " + insertId);
+        closeDatabase();
         return user;
     }
 
     public ArrayList<User> getAllUsers() {
         SQLiteDatabase database = open();
         ArrayList<User> arr = new ArrayList<>();
-        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, null, null, null ,null, null);
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, null,
+                null, null ,null, null);
         System.out.println("Count: " + cursor.getCount());
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) { // moveToNext starts before the first row
@@ -101,11 +103,10 @@ public class UserDbManager extends SQLiteOpenHelper {
 
     public boolean doesExistWithTheSameName(String name) {
         SQLiteDatabase database = open();
-        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, null, null, null, null, null);
-        while (cursor.moveToNext()) { // moveToNext starts before the first row
-            if (cursor.getString(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_NAME)).equals(name)) {
-                return true;
-            }
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns,
+                COLUMN_NAME + " =?", new String[]{name + ""}, null, null, null);
+        if (cursor.getCount() > 0) {
+            return true;
         }
         return false;
     }
@@ -113,30 +114,46 @@ public class UserDbManager extends SQLiteOpenHelper {
     public User logIn(String username, String password) {
         SQLiteDatabase database = open();
         User myUser = null;
-        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, null, null, null, null, null);
-        while (cursor.moveToNext()) { // moveToNext starts before the first row
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns,
+                COLUMN_NAME + " =?", new String[]{username + ""}, null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext(); // move to 1 // moveToNext starts before the first row
             if (cursor.getString(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_PASSWORD))
-                    .equals(password) && cursor.getString(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_NAME)).equals(username)) {
+                    .equals(password)) {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_NAME));
                 long id = cursor.getLong(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_ID));
                 int high_score = cursor.getInt(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_HIGH_SCORE));
                 User user = new User(id, name, password, high_score);
                 //System.out.println(user);
                 myUser = user;
-                break;
             }
         }
+        closeDatabase();
         return myUser;
 
     }
 
     public long getIdForUsername(String username) {
         SQLiteDatabase database = open();
-        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, COLUMN_NAME + " =?", new String[]{username + ""}, null, null, null);
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns,
+                COLUMN_NAME + " =?", new String[]{username + ""}, null, null, null);
         if (cursor.getCount() > 0) {
             cursor.moveToNext(); // move to 1
             return cursor.getLong(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_ID));
         }
+        closeDatabase();
+        return -1;
+    }
+
+    public long getScoreForUsername(String username) {
+        SQLiteDatabase database = open();
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns,
+                COLUMN_NAME + " =?", new String[]{username + ""}, null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext(); // move to 1
+            return cursor.getLong(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_HIGH_SCORE));
+        }
+        closeDatabase();
         return -1;
     }
 }

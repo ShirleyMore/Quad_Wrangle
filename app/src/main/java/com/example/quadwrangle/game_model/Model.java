@@ -87,23 +87,17 @@ public class Model {
 
         if (board.isGameOver()) { // game over
             mWinner.setValue(board.getWinner());
-            System.out.println(mWinner.getValue() + " mWInner in model");
             return false;
         }
 
-        System.out.println("current player: " + this.mTurn.getValue());
-        System.out.println("Square in do move: " + sq1 + ", Value: " + mBoard.getValue()[sq1.getRow()][sq1.getCol()]);
         // if it is an opponent square = bad move
         if (this.mBoard.getValue()[sq1.getRow()][sq1.getCol()] == this.board.getCurrentPlayer()*(-1)) {
-            System.out.println("not correct color");
             return false;
         }
         // if you pressed the saved one- remove the pressed
         if (this.mPressed_for_slide.getValue() != null) {
-            System.out.println("pressed not null");
             // if the square is the same one remove pressed
             if (sq1.equals(this.mPressed_for_slide.getValue())) {
-                System.out.println("Pressed not null & equals");
                 this.last_mPressed_for_slide.setValue(this.mPressed_for_slide.getValue()); // give last value to last pressed
                 this.mPressed_for_slide.setValue(null);
                 return false;
@@ -112,21 +106,18 @@ public class Model {
             // = change the pressed to the new sq
             else if (this.mBoard.getValue()[this.mPressed_for_slide.getValue().getRow()][this.mPressed_for_slide.getValue().getCol()]
                     == this.mBoard.getValue()[sq1.getRow()][sq1.getCol()]) {
-                System.out.println("pressed not null & same color");
                 this.last_mPressed_for_slide.setValue(this.mPressed_for_slide.getValue()); // give last value to last pressed
                 this.mPressed_for_slide.setValue(sq1);
                 return false;
             }
         }
         else if (!board.isEmptySquare(sq1)) {// if the square is occupied
-                System.out.println("occupied & saving");
                 this.last_mPressed_for_slide.setValue(this.mPressed_for_slide.getValue()); // give last value to last pressed
                 mPressed_for_slide.setValue(sq1); // add the square to the live data
                 return false; // kind of worked
         }
         // now the square is empty:
         Square sq2 = mPressed_for_slide.getValue(); // getting the second square if it exists
-        System.out.println("saved: " + sq2);
         boolean moved;
         if (sq2 != null) {// if a second square exists
             // slide from sq2 (saved) to sq1 (new)
@@ -162,27 +153,15 @@ public class Model {
 
         if (board.isGameOver()) { // if the game is over
             this.mWinner.setValue(board.getWinner());
-            System.out.println(mWinner.getValue() + " ------------mWInner in model");
             return;
         }
-        AlphaBetaBoard ab = new AlphaBetaBoard(board);
-        //System.out.println("scores before: " + ab.getPl1squares() + " 2:" + ab.getPl2squares());
-        Move move = bestMove(ab);
-        System.out.println(move);
-       // System.out.println("friendly: " + move.getFriendly_neighbours_count() + " enemy: " + move.getEnemy_neighbours_count() + " empty: " + move.getEmpty_neighbours_count() );
-        //System.out.println("Current player for this turn: " + board.getCurrentPlayer());
-        ab.printboard();
-        //System.out.println("\n");
-        AlphaBetaBoard.doMove(move, ab);
-        ab.printboard();
-        mBoard.setValue(ab.getBoard());
-        board = ab;
-        board.nextPlayer();
-        this.mTurn.setValue(board.getCurrentPlayer());
-        //System.out.println("Next player: " + board.getCurrentPlayer());
-        //System.out.println("Next player in mturn: " + mTurn.getValue());
-        //System.out.println("scores after: " + board.getPl1squares() + " 2: " + board.getPl2squares());
-        System.out.println("VAL: "+ab.getVal());
+        AlphaBetaBoard ab = new AlphaBetaBoard(board); // create new alpha beta board from current board
+        Move move = bestMove(ab); // get the best move (AI)
+        AlphaBetaBoard.doMove(move, ab); // do the move on the alpha beta board
+        mBoard.setValue(ab.getBoard()); // transfer the board with the move done to the mutable
+        board = ab; // update board
+        board.nextPlayer(); // change player to the next player
+        this.mTurn.setValue(board.getCurrentPlayer()); // update mutable
         board.updateScores(); // update the scores after the move
 
     }

@@ -125,7 +125,6 @@ public class GameFragment extends Fragment {
             }
         });
 
-
         return root;
     }
 
@@ -137,7 +136,6 @@ public class GameFragment extends Fragment {
 
 
     public void SAVE_GAME(View view) {
-        //todo: cant save a finished game (check if board is full)
         final Dialog dialog = new Dialog(this.getContext());
         dialog.setCancelable(true); // make it so if we press everywhere it cancels
         dialog.setContentView(R.layout.save_game_dialog); // connect to layout
@@ -213,14 +211,6 @@ public class GameFragment extends Fragment {
             });
         });
 
-        //yes.setOnClickListener((V) -> {
-
-            // todo: change game mode -> work on a good ai / 2player system
-            // todo: end screen
-            // todo: load a game
-            // todo: help screen with rules
-        //});
-        // show the dialog
         dialog.show();
     }
 

@@ -85,22 +85,19 @@ public class SavedGamesDbManager extends SQLiteOpenHelper {
     public ArrayList<SavedGame> getAllGamesForUser(long userId) {
         SQLiteDatabase database = open();
         ArrayList<SavedGame> arr = new ArrayList<>();
-        Cursor cursor = database.query(SavedGamesDbManager.TABLE_PRODUCT, allColumns, null, null, null ,null, null);
+        Cursor cursor = database.query(SavedGamesDbManager.TABLE_PRODUCT, allColumns, COLUMN_USER_ID + " =?", new String[]{userId + ""}, null ,null, null);
         System.out.println("Count: " + cursor.getCount());
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) { // moveToNext starts before the first row
-                long user_id = cursor.getLong(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_USER_ID));
-                if (user_id == userId) {// if its the right user's game
-                    long game_id = cursor.getLong(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_GAME_ID));
-                    String save_name = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_SAVE_NAME));
-                    String saved_date = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_SAVE_DATE));
-                    String board = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_BOARD));
-                    String next_player = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_NEXT_PLAYER));
-                    String game_type = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_GAME_TYPE));
-                    SavedGame game = new SavedGame(game_id, user_id, save_name, saved_date, board, next_player, game_type);
-                    //System.out.println(user);
-                    arr.add(game);
-                }
+                long game_id = cursor.getLong(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_GAME_ID));
+                String save_name = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_SAVE_NAME));
+                String saved_date = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_SAVE_DATE));
+                String board = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_BOARD));
+                String next_player = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_NEXT_PLAYER));
+                String game_type = cursor.getString(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_GAME_TYPE));
+                SavedGame game = new SavedGame(game_id, userId, save_name, saved_date, board, next_player, game_type);
+                //System.out.println(user);
+                arr.add(game);
             }
         }
         closeDatabase();
@@ -116,7 +113,8 @@ public class SavedGamesDbManager extends SQLiteOpenHelper {
     //limit: limit the number of results to return
     public SavedGame getGameById(long gameId) {
         SQLiteDatabase database = open();
-        Cursor cursor = database.query(SavedGamesDbManager.TABLE_PRODUCT, allColumns, COLUMN_GAME_ID + " =?", new String[]{gameId + ""}, null, null, null);
+        Cursor cursor = database.query(SavedGamesDbManager.TABLE_PRODUCT, allColumns,
+                COLUMN_GAME_ID + " =?", new String[]{gameId + ""}, null, null, null);
         if (cursor.getCount() > 0) {
             cursor.moveToNext(); // move to 1
             long user_id = cursor.getLong(cursor.getColumnIndexOrThrow(SavedGamesDbManager.COLUMN_USER_ID));

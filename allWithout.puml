@@ -1,0 +1,103 @@
+@startuml
+class com.example.quadwrangle.game_view.AnimationActivity {
+}
+class com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif {
+}
+class com.example.quadwrangle.game_view.AnimationActivity.MyHandler {
+}
+class com.example.quadwrangle.game_view.SquareButton {
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment {
+}
+class com.example.quadwrangle.game_model.Board {
+}
+class com.example.quadwrangle.game_model.database.UserInLeaderboard {
+}
+class com.example.quadwrangle.game_model.AlphaBeta {
+}
+class com.example.quadwrangle.game_model.database.SavedGame {
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel {
+}
+class com.example.quadwrangle.game_model.Model {
+}
+class com.example.quadwrangle.game_view_model.SavedGamesDbConnector {
+}
+class com.example.quadwrangle.game_view.DrawerActivity {
+}
+class com.example.quadwrangle.game_model.database.GameInSavedGamesPage {
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter {
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder {
+}
+class com.example.quadwrangle.game_model.Square {
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment {
+}
+class com.example.quadwrangle.game_view_model.ViewModelGame {
+}
+class com.example.quadwrangle.game_model.database.UserDbManager {
+}
+class com.example.quadwrangle.game_view.ui.game.GameFragment {
+}
+class com.example.quadwrangle.game_model.database.User {
+}
+class com.example.quadwrangle.game_view.ConnectionActivity {
+}
+class com.example.quadwrangle.game_model.Move {
+}
+class com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector {
+}
+class com.example.quadwrangle.game_model.MyService {
+}
+interface com.example.quadwrangle.game_view.ui.saved_games.IClickable {
+}
+class com.example.quadwrangle.game_view.OpeningScreenActivity {
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter {
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder {
+}
+class com.example.quadwrangle.game_model.AlphaBetaBoard {
+}
+class com.example.quadwrangle.game_model.database.SavedGamesDbManager {
+}
+class com.example.quadwrangle.game_view.MainActivity {
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel {
+}
+class com.example.quadwrangle.game_view.ui.game.GameViewModel {
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.AnimationActivity
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.Thread <|-- com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.Handler <|-- com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.AppCompatImageView <|-- com.example.quadwrangle.game_view.SquareButton
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.DrawerActivity
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter +.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view_model.ViewModelGame
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.UserDbManager
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.game.GameFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.ConnectionActivity
+android.app.Service <|-- com.example.quadwrangle.game_model.MyService
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.OpeningScreenActivity
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter
+com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter +.. com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_model.Board <|-- com.example.quadwrangle.game_model.AlphaBetaBoard
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.quadwrangle.game_model.database.SavedGamesDbManager
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.MainActivity
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel
+androidx.lifecycle.AndroidViewModel <|-- com.example.quadwrangle.game_view.ui.game.GameViewModel
+@enduml

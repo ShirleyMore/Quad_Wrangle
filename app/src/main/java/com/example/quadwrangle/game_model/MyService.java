@@ -25,7 +25,7 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //getting systems default ringtone
+        //getting my music
         player = MediaPlayer.create(this, R.raw.music);
         //setting loop play to true
         //this will make the ringtone continuously playing

@@ -15,7 +15,7 @@ import com.example.quadwrangle.game_view_model.UserDbLeaderboardConnector;
 import java.util.Arrays;
 
 public class GameViewModel extends AndroidViewModel {
-
+// android view model because I need the context for the database connectors in the constructor.
 
     public MutableLiveData<Integer> mWinner;
     public MutableLiveData<int[][]> mBoard;
@@ -41,11 +41,6 @@ public class GameViewModel extends AndroidViewModel {
         return this.last_mPressed_for_slide;
     }
 
-    public void run() {
-        // code in the other thread, can reference "var" variable
-        System.out.println("IN RUN");
-        model.doMoveAI();
-    }
 
     public MutableLiveData<Integer> getmTurn() {
         return this.mTurn;
@@ -165,7 +160,7 @@ public class GameViewModel extends AndroidViewModel {
     public boolean handleHighScore() {
         // high score only for AI mode.
         if (isAI.getValue()) { // if the game mode is AI
-            int scoreFromData = userDbLeaderboardConnector.getMyHighScore();
+            long scoreFromData = userDbLeaderboardConnector.getMyHighScore();
             int currentPlayer1Score = player1Score.getValue();
             if (currentPlayer1Score > scoreFromData) {
                 userDbLeaderboardConnector.updateScore(currentPlayer1Score);

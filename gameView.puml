@@ -1,0 +1,222 @@
+@startuml
+class com.example.quadwrangle.game_view.AnimationActivity {
+~ int numOfImages
+~ boolean stopAnimation
+- int[] animationId
+~ AnimationActivity.MyHandler handler
+~ ImageView background
+# void onCreate(Bundle)
++ void initAnimation()
++ void start()
++ void onClick(View)
+}
+class com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif {
+- int i
+- String name
++ <<Create>> AnimatedGif(String)
++ void run()
+- void sendCounter2Activity(int)
+}
+class com.example.quadwrangle.game_view.AnimationActivity.MyHandler {
++ void handleMessage(Message)
+}
+class com.example.quadwrangle.game_view.SquareButton {
+- {static} int black_img
+- {static} int white_img
+- {static} int black_img_glow
+- {static} int white_img_glow
+- int row
+- int col
++ <<Create>> SquareButton(Context,int,int)
++ int getRow()
++ int getCol()
++ void setPressedImg(int)
++ void setPlayerImg(int)
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment {
+- FragmentSavedGamesBinding binding
+- RecyclerView savedGamesRecyclerView
+- ArrayList<GameInSavedGamesPage> gamesArrayList
+- MySavedGamesAdapter myAdapter
+- UserDbLeaderboardConnector userDbLeaderboardConnector
+- SavedGamesDbConnector savedGamesDbConnector
+- GameViewModel gameViewModel
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void getData()
++ void onItemClick(int)
+}
+class com.example.quadwrangle.game_view.ui.game.GameFragment {
+- FragmentGameBinding binding
+- ConstraintLayout layout
+- GameViewModel viewModel
+- SquareButton[][] board
+- ImageView save_game
+- ImageView change_mode
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onDestroyView()
++ void SAVE_GAME(View)
++ void CHANGE_MODE(View)
+- void createBoard()
++ void game_over_dialog()
++ boolean handleHighScore()
+}
+class com.example.quadwrangle.game_view.ConnectionActivity {
+- ImageView logInButton
+- ImageView signUpButton
+- ImageView chooseLogInButton
+- ImageView chooseSignUpButton
+- ImageView backButton
+- TextView usernameText
+- TextView passwordText
+- UserDbLeaderboardConnector userDbLeaderboardConnector
+- String myUsername
+# void onCreate(Bundle)
++ void openLogIn(View)
++ void openSignIn(View)
++ void backButton(View)
++ void openInsert()
++ void LogIn(View)
++ void SignUp(View)
++ void stopOrStartMusic(View)
+}
+interface com.example.quadwrangle.game_view.ui.saved_games.IClickable {
+~ void onItemClick(int)
+}
+class com.example.quadwrangle.game_view.OpeningScreenActivity {
+# void onCreate(Bundle)
++ void startOnClick()
++ void onUserInteraction()
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel {
+- MutableLiveData<String> mText
++ <<Create>> LeaderboardViewModel()
++ LiveData<String> getText()
+}
+class com.example.quadwrangle.game_view.DrawerActivity {
+- AppBarConfiguration mAppBarConfiguration
+- ActivityDrawerBinding binding
+- UserDbLeaderboardConnector userDbLeaderboardConnector
+# void onCreate(Bundle)
++ void setDrawerHeader()
++ boolean onCreateOptionsMenu(Menu)
++ boolean onSupportNavigateUp()
++ void stopOrStartMusic(View)
++ boolean onOptionsItemSelected(MenuItem)
++ boolean handleMenu(MenuItem)
+- void openHowToPlayDialog()
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter {
+- Context context
+- ArrayList<UserInLeaderboard> usersArrayList
++ <<Create>> MyUsernameAdapter(Context,ArrayList<UserInLeaderboard>)
++ MyViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyViewHolder,int)
++ int getItemCount()
+}
+class com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder {
+~ TextView username_txt
+~ TextView score_txt
++ <<Create>> MyViewHolder(View)
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter {
+~ Context context
+~ ArrayList<GameInSavedGamesPage> savedGamesArrayList
+- IClickable iClickable
++ <<Create>> MySavedGamesAdapter(Context,ArrayList<GameInSavedGamesPage>,IClickable)
++ MyViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyViewHolder,int)
++ int getItemCount()
++ void onItemClick(int)
+}
+class com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder {
+~ TextView save_name_text
+~ TextView type_text
+~ TextView date_text
++ <<Create>> MyViewHolder(View,IClickable)
+}
+class com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment {
+- FragmentLeaderboardBinding binding
+- RecyclerView recyclerView
+- ArrayList<UserInLeaderboard> usersArrayList
+- MyUsernameAdapter myAdapter
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+- void getData()
+- void createUserTest()
+}
+class com.example.quadwrangle.game_view.MainActivity {
+- ConstraintLayout layout
+- ActivityMainBinding binding
+- ViewModelGame viewModel
+- SquareButton[][] board
+- TextView score1
+- TextView score2
+# void onCreate(Bundle)
+- void createBoard()
+}
+class com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel {
+- MutableLiveData<String> mText
++ <<Create>> SavedGamesFragmentViewModel()
++ LiveData<String> getText()
++ void loadGame(SavedGame)
+}
+class com.example.quadwrangle.game_view.ui.game.GameViewModel {
++ MutableLiveData<Integer> mWinner
++ MutableLiveData<int[][]> mBoard
++ MutableLiveData<Integer> mTurn
++ MutableLiveData<Integer> player1Score
++ MutableLiveData<Integer> player2Score
++ MutableLiveData<Square> mPressed_for_slide
++ MutableLiveData<Square> last_mPressed_for_slide
++ MutableLiveData<Boolean> isAI
++ SavedGamesDbConnector savedGamesDbConnector
++ UserDbLeaderboardConnector userDbLeaderboardConnector
+- Model model
+- {static} int SIZE
++ <<Create>> GameViewModel(Application)
++ MutableLiveData<Square> getmPressed_for_slide()
++ MutableLiveData<Square> getLast_mPressed_for_slide()
++ MutableLiveData<Integer> getmTurn()
++ int getPlayer1Score()
++ int getPlayer2Score()
++ boolean onTileClick(int,int)
++ void doMoveAI()
++ void saveGame(String)
++ int[][] getBoard()
++ boolean isGameOver()
++ void newGame(Context,boolean)
++ void loadGame(SavedGame)
+- int[][] makeIntBoard(String)
++ boolean handleHighScore()
++ String getWinner()
++ String getResultForClick(int,int)
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.AnimationActivity
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.Thread <|-- com.example.quadwrangle.game_view.AnimationActivity.AnimatedGif
+com.example.quadwrangle.game_view.AnimationActivity +.. com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.Handler <|-- com.example.quadwrangle.game_view.AnimationActivity.MyHandler
+com.example.quadwrangle.game_view.AppCompatImageView <|-- com.example.quadwrangle.game_view.SquareButton
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragment
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.game.GameFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.ConnectionActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.OpeningScreenActivity
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardViewModel
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.DrawerActivity
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter
+com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter +.. com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MyUsernameAdapter.MyViewHolder
+com.example.quadwrangle.game_view.ui.saved_games.IClickable <|.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.Adapter <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter
+com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter +.. com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+com.example.quadwrangle.game_view.Adapters.ViewHolder <|-- com.example.quadwrangle.game_view.Adapters.MySavedGamesAdapter.MyViewHolder
+androidx.fragment.app.Fragment <|-- com.example.quadwrangle.game_view.ui.leaderboard.LeaderboardFragment
+androidx.appcompat.app.AppCompatActivity <|-- com.example.quadwrangle.game_view.MainActivity
+androidx.lifecycle.ViewModel <|-- com.example.quadwrangle.game_view.ui.saved_games.SavedGamesFragmentViewModel
+androidx.lifecycle.AndroidViewModel <|-- com.example.quadwrangle.game_view.ui.game.GameViewModel
+@enduml

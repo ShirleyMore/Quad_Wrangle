@@ -199,31 +199,11 @@ public class Board {
         this.pl2squares = white;
     }
 
-    public void moveVoid(Square sq1, Square sq2) {
-        int move = isLegalMoveInt(sq1, sq2);
-        switch (move) {
-            case 0:
-                return;
-            case 1:
-                growth(sq1);
-                break;
-            case 2:
-                slide(sq1, sq2);
-                break;
-            case 3:
-                drop(sq1);
-                break;
-        }
-        nextPlayer();
-    }
-
     // this function does a move and returns if it worked
     // I made it so I wont have to check if the move is legal + check which move it is
     // so that I don't have to go over the matrix twice.
     public boolean move(Square sq1, Square sq2) {
-        System.out.println("IN BOARD: loc1: "+sq1 +" loc2: "+ sq2);
         int move = isLegalMoveInt(sq1, sq2);
-        System.out.println("Move type: " + move);
         switch (move) {
             case 0:
                 return false;
@@ -349,26 +329,6 @@ public class Board {
         return ((this.pl1squares + this.pl2squares) == (size*size)); // from now on size is always 49
     }
 
-    // returns if there is ANY possible move
-    private boolean checkANYPossibleMoveOnBoard() {
-        boolean drop = false;
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
-                Square sq = new Square(row, col);
-                if (isEmptySquare(sq)) {// if the square is empty
-                    if (checkAvailableGrowth(sq)) // if this place is allowed for growth
-                        return true;
-                    else if ((checkAvailableDrop(sq))) // also checking if a drop is possible so I don't have to go over the matrix twice
-                        drop = true;
-                }
-                else // if the square is occupied
-                    if (getValue(sq) == this.currentPlayer) // if it is the current players type
-                        if (checkAvailableSlide(sq)) // if it is possible to slide this square
-                            return true;
-            }
-        }
-        return drop; // if I get down here - it means there was no possible slide or growth- so I return if there was a possible drop.
-    }
 
     // this function returns if there is ANY possible growth or slide on the board
     protected boolean checkANYPossibleSlideORGrowthOnBoard() {
