@@ -165,7 +165,7 @@ public class GameViewModel extends AndroidViewModel {
     public boolean handleHighScore() {
         // high score only for AI mode.
         if (isAI.getValue()) { // if the game mode is AI
-            int scoreFromData = userDbLeaderboardConnector.getMyHighScore();
+            long scoreFromData = userDbLeaderboardConnector.getMyHighScore();
             int currentPlayer1Score = player1Score.getValue();
             if (currentPlayer1Score > scoreFromData) {
                 userDbLeaderboardConnector.updateScore(currentPlayer1Score);

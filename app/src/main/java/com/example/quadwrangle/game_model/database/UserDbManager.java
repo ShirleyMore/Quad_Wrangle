@@ -107,6 +107,7 @@ public class UserDbManager extends SQLiteOpenHelper {
                 return true;
             }
         }
+        closeDatabase();
         return false;
     }
 
@@ -126,6 +127,7 @@ public class UserDbManager extends SQLiteOpenHelper {
                 break;
             }
         }
+        closeDatabase();
         return myUser;
 
     }
@@ -137,6 +139,18 @@ public class UserDbManager extends SQLiteOpenHelper {
             cursor.moveToNext(); // move to 1
             return cursor.getLong(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_ID));
         }
+        closeDatabase();
+        return -1;
+    }
+
+    public long getScoreForUsername(String username) {
+        SQLiteDatabase database = open();
+        Cursor cursor = database.query(UserDbManager.TABLE_PRODUCT, allColumns, COLUMN_NAME + " =?", new String[]{username + ""}, null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToNext(); // move to 1
+            return cursor.getLong(cursor.getColumnIndexOrThrow(UserDbManager.COLUMN_HIGH_SCORE));
+        }
+        closeDatabase();
         return -1;
     }
 }

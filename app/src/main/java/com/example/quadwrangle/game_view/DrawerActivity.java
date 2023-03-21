@@ -79,6 +79,7 @@ public class DrawerActivity extends AppCompatActivity{
     }
 
     public void setDrawerHeader() {
+        System.out.println("DRAWER HEADER UPDATED");
         TextView username_text = findViewById(R.id.Username_text);
         TextView score_text = findViewById(R.id.Highscore_text);
         username_text.setText("Hello " + userDbLeaderboardConnector.getMyUsername());

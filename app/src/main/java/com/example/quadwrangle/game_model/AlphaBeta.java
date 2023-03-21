@@ -52,7 +52,7 @@ public class AlphaBeta {
         //    abBoard.setVal(0);
         //    return -10000; // todo: fix
         //}
-        if (depth == 0) {
+        if (depth == 0 || abBoard.isGameOver()) {
             val = abBoard.evaluateBoard();
             abBoard.setVal(val);
             return val;
